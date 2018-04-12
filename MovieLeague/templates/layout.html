@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">-->
+    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.css">
+
+    <script src="semantic/dist/semantic.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="static/css/semantic.min.css">
+    <script type='text/javascript' src="static/js/semantic.min.js"></script>
+    <!--<link rel="stylesheet" href="/static/css/semantic.min.css">-->
+    <!--<script type='text/javascript' src="/static/js/semantic.min.js"></script>-->
+
+
+  </head>
+  <body>
+
+    <div class="ui grid">
+      <div class="two wide column"></div>
+      <div class="twelve wide column">
+          <header>
+            <div class="container">
+              <h1 class="title">Movie League</h1>
+            </div>
+          </header>
+        {% block content %}
+        {% endblock %}
+      </div>
+      <div class="two wide column"></div>
+
+    </div>
+    
+  </body>
+</html>

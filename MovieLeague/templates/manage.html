@@ -1,0 +1,104 @@
+{% extends "UserLayout.html" %}
+{% block content %}
+
+{% for user in users %}
+{{user.length}}
+{% endfor %}
+
+<form class='ui form' id='UserForm' method="POST" action="/manage/{{league}}">
+    {{ form.hidden_tag() }}
+    <div id="formgroup" class="form-group">
+        <div id="equalqwidthfields" class="equal width fields">
+            <div class="field">
+                {{ form.name.label}}
+                <div class="ui search selection dropdown">
+                  <input id="UsersDefaultNameInput" name="name" type="name">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" id="UsersDefaultNameDiv">Default</div>
+                  <div class="menu">
+                      {% for user in users %}
+                      <div class="item" data-value="{{user[0]}}">{{user[1]}}</div>
+                      {% endfor %}
+                  </div>
+                </div>
+            </div>
+            <div class="field">
+                {{ form.movie.label}}
+                <div class="ui search selection dropdown">
+                  <input id="UsersDefaultMovieInput" name="movie" type="movie">
+                  <i class="dropdown icon"></i>
+                  <div class="default text" id="UsersDefaultMovieDiv">Default</div>
+                  <div class="menu">
+                      {% for movie in movies %}
+                      <div class="item" data-value="{{movie[0]}}">{{movie[1]}}</div>
+                      {% endfor %}
+                  </div>
+                </div>
+                <div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="submitForm">
+        <input class="ui button" id="submit" name="submit" type="submit" value="Enter Test Stuff">
+    </div>
+</form>
+
+
+<table class="ui sortable celled table">
+  <thead>
+    <tr>
+      <th class="">Users</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+        <tr>
+            <td>
+                {{ user[1] }}
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script type='text/javascript' src="/static/js/main.js"></script>
+<div id="container"></div>
+<div class="ui animated button" tabindex="0" onclick="passToJS()">
+  <div class="visible content">Next</div>
+  <div class="hidden content">
+    <i class="right arrow icon"></i>
+  </div>
+</div>
+
+{{users_json}}
+<script>
+    var count = 0;
+    var user_return = []
+    var movie_return = []
+    function passToJS() {
+
+        addinputFields("{{users_json}}", "{{movies_json}}")
+    };
+    $("#submitForm").click(function() {
+        var user_list = $('[id^="UsersDefaultNameDiv"]');
+        var movie_list = $('[id^="UsersDefaultMovieDiv"]');
+        $.each(user_list, function(index, value){
+            user_return.push($(this).html())
+        });
+        $.each(movie_list, function(index, value){
+            movie_return.push($(this).html())
+        });
+        $("#UsersDefaultNameInput").val(user_return.toString());
+        $("#UsersDefaultMovieInput").val(movie_return.toString());
+
+    });
+
+    $(function() {
+        $('.ui.dropdown')
+            .dropdown();
+    });
+
+</script>
+
+{% endblock %}

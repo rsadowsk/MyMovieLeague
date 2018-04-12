@@ -1,0 +1,29 @@
+{% extends "UserLayout.html" %}
+{% block content %}
+    <ul>
+    {% for league in my_movies %}
+        <li>
+            {{ league }}
+            <table class="ui sortable celled table">
+              <thead>
+                <tr>
+                  <th class="">Movie Title</th>
+                  <th class="">Foreign Gross</th>
+                  <th class="">Domestic Gross</th>
+                  <th class="sorted descending">Worldwide Gross</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for movie_info in my_movies[league] %}
+                <tr>
+                    {% for data in movie_info %}
+                        <td>
+                            {{ data }}
+                        </td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+            </ul>
+    {% endfor %}
+{% endblock %}

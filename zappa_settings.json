@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "MovieLeague.routes.app", 
+        "aws_region": "eu-west-1", 
+        "profile_name": "default", 
+        "project_name": "fantasymovielea", 
+        "runtime": "python2.7", 
+        "s3_bucket": "zappa-rsjt6l2j6"
+    }
+}

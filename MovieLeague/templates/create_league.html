@@ -1,0 +1,66 @@
+{% extends "UserLayout.html" %}
+{% block content %}
+
+<form class='ui form' method="POST" action="/create_league">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+                {{ form.league_name.label}}
+                {{ form.league_name }}
+                {% if form.league_name.errors %}
+                    {% for error in form.league_name.errors %}
+                         <h5 class="ui bottom attached red header">{{ error }}</h5>
+                    {% endfor %}
+                {% endif %}
+        <!-- TODO update help icons -->
+        <div class="equal width fields">
+            <div class="field">
+                <div>
+                    {{ form.start_date.label}}
+                    <div class="ui icon button" data-tooltip="Add users to your feed">
+                    <i class="question icon"></i>
+                </div>
+                </div>
+                {{ form.start_date(class='datepicker') }}
+                {% if form.start_date.errors %}
+                    {% for error in form.start_date.errors %}
+                        <h5 class="ui bottom attached red header">{{ error }}</h5>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="field">
+                <div>
+                    {{ form.end_date.label}}
+                    <div class="ui icon button" data-tooltip="Add users to your feed">
+                    <i class="question icon"></i>
+                </div>
+                </div>
+                {{ form.end_date(class='datepicker') }}
+                {% if form.end_date.errors %}
+                    {% for error in form.end_date.errors %}
+                         <h5 class="ui bottom attached red header">{{ error }}</h5>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="field">
+                <div>
+                    {{ form.end_record.label}}
+                    <div class="ui icon button" data-tooltip="Add users to your feed">
+                    <i class="question icon"></i>
+                </div>
+                </div>
+                {{ form.end_record(class='datepicker') }}
+                {% if form.end_record.errors %}
+                    {% for error in form.end_record.errors %}
+                       <h5 class="ui bottom attached red header">{{ error }}</h5>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+    {{ form.submit(class="ui button") }}
+
+</form>
+
+{% endblock %}
