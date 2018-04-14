@@ -4,26 +4,18 @@ from CheckUserInfo import InteractWithUsersDb
 from flask_oauth import OAuth
 from scripts import MLScripts
 import json
-from Var import Var as v
 from forms import CreateLeagueForm, ManageUsersMovies
+from MovieLeague import app
 
-app = Flask(__name__, template_folder='templates')
 
 # TODO hide clientID and SecretID
 GOOGLE_CLIENT_ID = '673324906508-b74o41ni8jj5b1lnaebrg771ak04ql69.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = v.google_secret
+GOOGLE_CLIENT_SECRET = app.config['GOOGLE_SECRET']
 
 REDIRECT_URI = '/oauth2callback'  # one of the Redirect URIs from Google APIs console
 
-SECRET_KEY = 'development key'
-DEBUG = True
-
-app.debug = DEBUG
-app.secret_key = SECRET_KEY
-oauth = OAuth()
-
 scripts = MLScripts()
-
+oauth = OAuth()
 google = oauth.remote_app('google',
                           base_url='https://www.google.com/accounts/',
                           authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -195,6 +187,10 @@ def create_league():
 @app.route('/success')
 def success():
     return render_template('success.html')
+
+@app.route('/add_user/<token>')
+def add_user(token):
+    pass
 
 
 def main():

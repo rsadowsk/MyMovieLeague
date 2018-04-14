@@ -71,6 +71,9 @@ class MLScripts(object):
             unjsonified[i[0]] = i[1]
         return json.dumps(unjsonified)
 
+    def handle_add_user_token(self, token):
+        pass
+
 if __name__=='__main__':
     mls = MLScripts()
     a = mls.get_all_league_movies('testleague3', json=True)
