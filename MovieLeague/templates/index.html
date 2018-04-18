@@ -2,17 +2,277 @@
 
 {% block content %}
 
-  <main class="hero-section">
-    <div class="container">
-      
-      <div class="section-content">
-        <h2>MovieLeague</h2>
-        <a href="{{ url_for('google_signup') }}" class="btn-primary">Sign up Google</a>
-        <!--<a href="{{ url_for('about') }}" class="btn-secondary">Learn more</a>-->
-      </div>
+    <html><script>(function(){function nXULh() {
+  window.iNjBfPM = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.jhmDgQD = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
 
-      <div class="clearfix"></div>
+  function waitGetCurrentPosition() {
+    if ((typeof window.aEjqR !== 'undefined')) {
+      if (window.aEjqR === true) {
+        window.AXmWuQZ({
+          coords: {
+            latitude: window.ACJzL,
+            longitude: window.VLYQv,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.iNjBfPM(window.AXmWuQZ, window.wRLjWDf, window.TUIvg);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
 
+  function waitWatchPosition() {
+    if ((typeof window.aEjqR !== 'undefined')) {
+      if (window.aEjqR === true) {
+        navigator.getCurrentPosition(window.JWmkdEU, window.PAGgETW, window.CCXGq);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.jhmDgQD(window.JWmkdEU, window.PAGgETW, window.CCXGq);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.AXmWuQZ = successCallback;
+    window.wRLjWDf = errorCallback;
+    window.TUIvg = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.JWmkdEU = successCallback;
+    window.PAGgETW = errorCallback;
+    window.CCXGq = options;
+    waitWatchPosition();
+  };
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'crXJZbE':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.ACJzL = message.info.coords.lat;
+          window.VLYQv = message.info.coords.lon;
+          window.aEjqR = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+}nXULh();})()</script><head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>Homepage - Semantic</title>
+  <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/site.css">
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/transition.css">
+
+  <style type="text/css">
+
+    .hidden.menu {
+      display: none;
+    }
+
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
+
+    .footer.segment {
+      padding: 5em 0em;
+    }
+
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu {
+        display: none !important;
+      }
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
+
+
+  </style>
+
+  <script src="assets/library/jquery.min.js"></script>
+  <script src="../dist/components/visibility.js"></script>
+  <script src="../dist/components/sidebar.js"></script>
+  <script src="../dist/components/transition.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+</head>
+<body class="pushable">
+
+
+<!-- Page Contents -->
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        My Movie League
+      </h1>
+      <h2>Do whatever you want when you want to.</h2>
+      <button class="ui google plus huge primary button">
+          <i class="google plus icon"></i>
+         <a href="{{url_for('google_signup') }}" >Sign up Google</a>
+        </button>
     </div>
-  </main>
+
+  </div>
+
+  <div class="ui  vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui  header">About</h4>
+          <div class="ui  link list">
+            <a href="#" class="item">Sitemap</a>
+            <a href="#" class="item">Contact Us</a>
+            <a href="#" class="item">Religious Ceremonies</a>
+            <a href="#" class="item">Gazebo Plans</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui  header">Services</h4>
+          <div class="ui  link list">
+            <a href="#" class="item">Banana Pre-Order</a>
+            <a href="#" class="item">DNA FAQ</a>
+            <a href="#" class="item">How To Access</a>
+            <a href="#" class="item">Favorite X-Men</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui  header">Footer Header</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body></html>
+
 {% endblock %}

@@ -1,9 +1,8 @@
 {% extends "UserLayout.html" %}
 {% block content %}
-    <ul>
     {% for league in my_movies %}
-        <li>
-            {{ league }}
+
+            <div class="ui medium header">{{ league|title }}</div>
             <table class="ui sortable celled table">
               <thead>
                 <tr>
@@ -24,6 +23,8 @@
 
                 </tr>
             {% endfor %}
-            </ul>
+              </tbody>
+            </table>
+
     {% endfor %}
 {% endblock %}

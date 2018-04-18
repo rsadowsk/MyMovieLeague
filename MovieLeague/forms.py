@@ -1,5 +1,5 @@
-from flask_wtf import Form
-from wtforms import StringField, SubmitField
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, HiddenField
 from wtforms.fields.html5 import DateField
 from wtforms import validators, ValidationError
 
@@ -12,7 +12,7 @@ def validate_date(form, field):
         raise ValidationError('Year must be before 2050')
 
 
-class CreateLeagueForm(Form):
+class CreateLeagueForm(FlaskForm):
     league_name = StringField("League Name",
                               validators=[validators.DataRequired("Please enter a valid name.")])
     start_date = DateField('Start Date', format='%Y-%m-%d',
@@ -27,7 +27,7 @@ class CreateLeagueForm(Form):
     submit = SubmitField("Enter Test Stuff")
 
     def validate(self):
-        if not Form.validate(self):
+        if not FlaskForm.validate(self):
             return False
         ret = True
         if self.start_date.data >= self.end_date.data:
@@ -39,11 +39,16 @@ class CreateLeagueForm(Form):
         return ret
 
 
-class ManageUsersMovies(Form):
+class ManageUsersMovies(FlaskForm):
     name = StringField("Name", id="UsersName")
-
     movie = StringField("Movie", id="UsersMovie")
-    submit = SubmitField("Enter Test Stuff")
+    ret = HiddenField(id='ret')
+    submit = SubmitField("Submit")
+
+
+class InviteFriends(FlaskForm):
+    email = StringField("Email", id="email_0", validators=[validators.DataRequired(), validators.Email()])
+    submit = SubmitField("Invite")
 
 
 if __name__=='__main__':

@@ -1,27 +1,40 @@
 {% include "layout.html" %}
-<div class="ui grid">
-  <div class="two wide column"></div>
-  <div class="twelve wide column">
-  <div class="ui secondary pointing menu">
-    <a class="item" href="{{ url_for('home') }}">
-      Home
-    </a>
-    <a class="item" href="{{ url_for('my_movies') }}">
-      My Movies
-    </a>
-    <a class="item" href="{{ url_for('leagues') }}">
-      Leagues
-    </a>
-    <div class="right menu">
-      <a class="item" href="{{ url_for('logout') }}">
-        Logout
-      </a>
-    </div>
-  </div>
 
-    {% block content %}
-    {% endblock %}
-  </div>
-  <div class="two wide column"></div>
+  <body>
 
-</div>
+    <div class="ui grid">
+      <div class="two wide column"></div>
+      <div class="twelve wide column">
+          <header>
+            <div class="container">
+              <h1 class="title">My Movie League</h1>
+            </div>
+          </header>
+
+          <div class="ui secondary pointing menu">
+            <a class="item" href="{{ url_for('home') }}">
+              Home
+            </a>
+            <a class="item" href="{{ url_for('my_movies') }}">
+              My Movies
+            </a>
+            <a class="item" href="{{ url_for('leagues') }}">
+              Leagues
+            </a>
+            <div class="right menu">
+              <a class="item" href="{{ url_for('logout') }}">
+                Logout
+              </a>
+            </div>
+          </div>
+
+            {% block content %}
+            {% endblock %}
+          </div>
+          <div class="two wide column"></div>
+
+        </div>
+
+
+
+  </body>

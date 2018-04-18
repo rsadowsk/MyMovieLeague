@@ -5,6 +5,7 @@
 {{user.length}}
 {% endfor %}
 
+
 <form class='ui form' id='UserForm' method="POST" action="/manage/{{league}}">
     {{ form.hidden_tag() }}
     <div id="formgroup" class="form-group">
@@ -34,13 +35,18 @@
                       {% endfor %}
                   </div>
                 </div>
-                <div>
             </div>
         </div>
-    </div>
+        {{ form.ret }}
     </div>
     <div id="submitForm">
-        <input class="ui button" id="submit" name="submit" type="submit" value="Enter Test Stuff">
+        <div class="ui animated button" tabindex="0" onclick="passToJS()">
+          <div class="visible content">Add</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+        </div>
+        <input class="ui button" id="submit" name="submit" type="submit" value="Submit">
     </div>
 </form>
 
@@ -61,42 +67,30 @@
     {% endfor %}
   </tbody>
 </table>
-
+<div class="ui animated button" tabindex="0">
+          <a href="/invite_friend/{{league}}">
+          <div class="visible content">Invite Friends</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+          </a>
+        </div>
 <script type='text/javascript' src="/static/js/main.js"></script>
 <div id="container"></div>
-<div class="ui animated button" tabindex="0" onclick="passToJS()">
-  <div class="visible content">Next</div>
-  <div class="hidden content">
-    <i class="right arrow icon"></i>
-  </div>
-</div>
 
-{{users_json}}
+
 <script>
     var count = 0;
-    var user_return = []
-    var movie_return = []
-    function passToJS() {
 
+    function passToJS() {
         addinputFields("{{users_json}}", "{{movies_json}}")
     };
-    $("#submitForm").click(function() {
-        var user_list = $('[id^="UsersDefaultNameDiv"]');
-        var movie_list = $('[id^="UsersDefaultMovieDiv"]');
-        $.each(user_list, function(index, value){
-            user_return.push($(this).html())
-        });
-        $.each(movie_list, function(index, value){
-            movie_return.push($(this).html())
-        });
-        $("#UsersDefaultNameInput").val(user_return.toString());
-        $("#UsersDefaultMovieInput").val(movie_return.toString());
-
+    $("#submitForm").on('click',function() {
+        $('#ret').val($('.selection.dropdown').dropdown('get value'))
     });
 
     $(function() {
-        $('.ui.dropdown')
-            .dropdown();
+        $('.ui.dropdown').dropdown();
     });
 
 </script>

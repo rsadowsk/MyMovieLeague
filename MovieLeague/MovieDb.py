@@ -1,5 +1,6 @@
 import pymysql.cursors, os
 from Var import Var as v
+from collections import OrderedDict
 # from GetMovieMojoGross import GetMovieData
 
 
@@ -266,7 +267,47 @@ class InteractWithMovieDb(object):
         cur.execute(insert)
         return cur.fetchall()
 
+    def add_user_movie_to_league_list(self, league, data):
+        #insert into testleague3 (user_id, movie_id) values (1,3), (2,4),(2,9)
+        cur = self.db.cursor()
+        insert_stmt = ("INSERT INTO %s (user_id, movie_id) VALUES %s")
+        data = (league, data)
+        insert = insert_stmt % data
+        print insert
+        cur.execute(insert)
+        self.db.commit()
+
+    def get_league_totals(self, league):
+        # select users.user_name, %s_movies.worldwide_gross from %s join %s_movies on %s_movies.id=%s.movie_id join users on users.id=%s.user_id
+        cur = self.db.cursor()
+        insert_stmt = ("select users.user_name, %s_movies.worldwide_gross from %s "
+                       "join %s_movies on %s_movies.id=%s.movie_id "
+                       "join users on users.id=%s.user_id")
+        data = (league, league, league, league, league, league)
+        insert = insert_stmt % data
+        cur.execute(insert)
+        return cur.fetchall()
+
+    def convert_dollar_to_int(self, dollar):
+        dollar = dollar.replace("$", "")
+        dollar = dollar.replace(",", "")
+        return int(dollar)
+
+    def convert_int_to_dollar(self, dollar):
+        return '${:,}'.format(dollar)
+
+    def get_league_totals_for_all_users(self, league):
+        movies = self.get_league_totals(league)
+        total = OrderedDict()
+        for i in movies:
+            if i[0] not in total.keys():
+                total[i[0]] = self.convert_dollar_to_int(i[1])
+            else:
+                total[i[0]] = total[i[0]] + self.convert_dollar_to_int(i[1])
+        for i in total:
+            total[i] = self.convert_int_to_dollar(total[i])
+        return total
+
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_league_users('testleague3')
-
+    print db.get_league_totals_for_all_users('testleague3')

@@ -1,0 +1,63 @@
+{% extends "UserLayout.html" %}
+{% block content %}
+{% set count=0 %}
+
+
+<form class='ui form' id='UserForm' method="POST" action="/invite_friend/{{league}}">
+    {{ form.hidden_tag() }}
+    <div id="contain">
+        {{ form.email.label }}
+        {{ form.email }}
+    </div>
+        <br>
+
+    <div id="submitForm">
+        <div class="ui animated button" id="add" tabindex="0">
+          <div class="visible content">Add More</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+        </div>
+         <div class="ui animated button" id="remove" tabindex="0">
+          <div class="visible content">Remove</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+        </div>
+        <input class="ui button" id="submit" name="submit" type="submit" value="Submit">
+    </div>
+
+
+</form>
+
+    <script>
+        var count = 1;
+        $(function() {
+            $('#add').click(function() {addFields();});
+        });
+        $(function() {
+            $('#remove').click(function() {removeFields();});
+        });
+
+        function addFields(){
+            var html = `<input id="email_${count}" name="email_${count}" type="text" value="">`;
+            $('#contain').append(html);
+            count++;
+        }
+        function removeFields() {
+            count--;
+            var html = `email_${count}`;
+            $('#'+html).remove();
+
+        }
+        $("#submitForm").click(function() {
+            var test1=[];
+            var test = $('[id^="email_"]');
+            $.each(test, function(index, value){
+                test1.push($(this).html())
+            });
+        });
+
+
+    </script>
+{% endblock %}

@@ -3,16 +3,17 @@ from sendgrid.helpers.mail import *
 from itsdangerous import URLSafeSerializer
 
 
+
 class SendEmail(object):
     def __init__(self):
         self.serial = URLSafeSerializer(app.config["SECRET_KEY"])
         self.sg = SGMail
 
-    def send_test_email(self, to_email):
+    def send_invite_email(self, sender, league, to_email):
         from_email = Email("no-reply@movieleague.co.uk")
         to_email = Email(to_email)
-        subject = "Sending with SendGrid is Fun"
-        content = Content("text/plain", "and easy to do anywhere, even with Python")
+        subject = "Invite to join %s" % league
+        content = Content("text/plain", "%s has invited you to join %s") % sender, league
         mail = Mail(from_email, subject, to_email, content)
         response = self.sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)

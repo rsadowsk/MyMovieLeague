@@ -5,6 +5,8 @@
         "profile_name": "default", 
         "project_name": "fantasymovielea", 
         "runtime": "python2.7", 
-        "s3_bucket": "zappa-rsjt6l2j6"
+        "s3_bucket": "zappa-rsjt6l2j6",
+        "certificate_arn": "arn:aws:acm:us-east-1:503748839562:certificate/2fccd73e-7417-44eb-ad4c-be950dee46a0",
+        "domain": "www.mymovieleague.com"
     }
 }

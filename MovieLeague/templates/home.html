@@ -1,9 +1,31 @@
 {% extends "UserLayout.html" %}
 {% block content %}
   <main class="about-section">
-    <div class="container">
         <h2 class="ui large header">Home</h2>
         <h3 class="ui medium header">Welcome {{ name }}</h3>
+        {% for league in my_movies %}
+            <table class="ui celled striped table">
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <div>{{ league|title }}</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in my_movies[league] %}
+                <tr>
+                    <td>
+                        {{ item|title }}
+                    </td>
+                    <td>
+                        {{ my_movies[league][item] }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        {% endfor %}
     </div>
   </main>
 {% endblock %}

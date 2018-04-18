@@ -1,9 +1,9 @@
 from CheckUserInfo import InteractWithUsersDb
-from GetMyLeagues import GetMyLeagues
 from GetMyMovies import GetMyMovies
 from collections import OrderedDict
 from MovieDb import InteractWithMovieDb
 from GetMovieList import GetMovieList
+from testemail import SendEmail
 import json
 
 
@@ -13,12 +13,11 @@ class MLScripts(object):
 
     @staticmethod
     def my_movies(user_info):
+        my_movies = OrderedDict()
         db = InteractWithUsersDb()
         movie_db = InteractWithMovieDb()
         id = db.get_user_info(user_info["name"])[0][0]
-        my_movies = OrderedDict()
-        ml = GetMyLeagues(user_info)
-        leagues = ml.get_users_leagues()
+        leagues = movie_db.get_users_leagues(str(id))
         for league in leagues:
             movie_data = movie_db.get_users_movie_info_from_league(league, id)
             totals = GetMyMovies(league, id)
@@ -73,6 +72,34 @@ class MLScripts(object):
 
     def handle_add_user_token(self, token):
         pass
+
+    def send_invite_friend_email(self, sender, league, emails):
+        for email in emails:
+            SendEmail(sender, league, email)
+
+    @staticmethod
+    def add_user_movie_to_league_list(league, values):
+        data = []
+        values = values.split(',')
+        values = [values[idx:idx+2] for idx in range(0, len(values), 2)]
+        for l in values:
+            data.append("("+','.join(l)+")")
+        data = ', '.join(data)
+        db = InteractWithMovieDb()
+        db.add_user_movie_to_league_list(league, data)
+
+    @staticmethod
+    def my_movies_league_totals_info(user_info):
+        my_movies = OrderedDict()
+        db = InteractWithUsersDb()
+        movie_db = InteractWithMovieDb()
+        id = db.get_user_info(user_info["name"])[0][0]
+        leagues = movie_db.get_users_leagues(str(id))
+        for league in leagues:
+            league_info = movie_db.get_league_totals_for_all_users(league)
+            my_movies[league] = league_info
+        return my_movies
+
 
 if __name__=='__main__':
     mls = MLScripts()

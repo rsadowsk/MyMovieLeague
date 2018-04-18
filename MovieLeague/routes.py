@@ -4,7 +4,7 @@ from CheckUserInfo import InteractWithUsersDb
 from flask_oauth import OAuth
 from scripts import MLScripts
 import json
-from forms import CreateLeagueForm, ManageUsersMovies
+from forms import CreateLeagueForm, ManageUsersMovies, InviteFriends
 from MovieLeague import app
 
 
@@ -113,9 +113,9 @@ def my_movies():
 def home():
     if session.get('access_token') is None:
         return render_template("index.html")
-    elif request.method == "GET":
-        name = session["json"]["given_name"]
-        return render_template("home.html", name=name)
+    name = session["json"]["given_name"]
+    my_movies = scripts.my_movies_league_totals_info(session['json'])
+    return render_template("home.html", my_movies=my_movies, name=name)
 
 
 @app.route("/leagues")
@@ -124,7 +124,6 @@ def leagues():
         return render_template("index.html")
     elif request.method == "GET":
         leagues = scripts.get_leagues(session["json"]["name"])
-        print leagues
         return render_template("leagues.html", leagues=leagues)
 
 
@@ -141,11 +140,9 @@ def manage(league):
     if session.get('access_token') is None:
         return render_template("index.html")
     form = ManageUsersMovies()
-    print request.method
     if request.method == 'POST':
-        print request
-        print form.name.data
-        print form.movie.data
+        values = form.ret.data
+        scripts.add_user_movie_to_league_list(league, values)
         users, users_json = scripts.get_league_users(league, json=True)
         movies, movies_json = scripts.get_all_league_movies(league, json=True)
         return render_template("manage.html", league=league, form=form, users=users,
@@ -164,7 +161,6 @@ def under_construction():
 @app.route("/create_league", methods=["GET", "POST"])
 def create_league():
     form = CreateLeagueForm()
-    print request.method
     if request.method == 'POST':
         if not form.validate():
             return render_template('create_league.html', form=form)
@@ -187,6 +183,29 @@ def create_league():
 @app.route('/success')
 def success():
     return render_template('success.html')
+
+
+@app.route('/invite_friend/<string:league>', methods=["GET", "POST"])
+def invite_friend(league):
+    if session.get('access_token') is None:
+        return render_template("index.html")
+    form = InviteFriends()
+    if request.method == 'POST':
+        v = request.form.to_dict(flat=False)
+        data = [value for key, value in v.items() if 'email' in key.lower()]
+        emails =[]
+        for i in data:
+            emails.append(i[0])
+        sender = session["json"]["name"]
+        scripts.send_invite_friend_email(sender, league, emails)
+
+
+        if not form.validate():
+            return render_template('invite_friend.html', league=league, form=form)
+        else:
+            return render_template('invite_friend.html', league=league, form=form)
+    elif request.method == 'GET':
+        return render_template('invite_friend.html',league=league, form=form)
 
 @app.route('/add_user/<token>')
 def add_user(token):
