@@ -9,8 +9,8 @@
 <form class='ui form' id='UserForm' method="POST" action="/manage/{{league}}">
     {{ form.hidden_tag() }}
     <div id="formgroup" class="form-group">
-        <div id="equalqwidthfields" class="equal width fields">
-            <div class="field">
+        <div id="equalqwidthfields" class="fields">
+            <div class="eight wide field">
                 {{ form.name.label}}
                 <div class="ui search selection dropdown">
                   <input id="UsersDefaultNameInput" name="name" type="name">
@@ -23,7 +23,7 @@
                   </div>
                 </div>
             </div>
-            <div class="field">
+            <div class="seven wide field">
                 {{ form.movie.label}}
                 <div class="ui search selection dropdown">
                   <input id="UsersDefaultMovieInput" name="movie" type="movie">
@@ -36,11 +36,13 @@
                   </div>
                 </div>
             </div>
+            <div class="one wide field">
+            </div>
         </div>
         {{ form.ret }}
     </div>
-    <div id="submitForm">
-        <div class="ui animated button" tabindex="0" onclick="passToJS()">
+    <div >
+        <div id="submitForm" class="ui animated button" tabindex="0" onclick="passToJS()">
           <div class="visible content">Add</div>
           <div class="hidden content">
             <i class="plus icon"></i>

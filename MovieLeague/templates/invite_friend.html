@@ -1,13 +1,19 @@
 {% extends "UserLayout.html" %}
 {% block content %}
-{% set count=0 %}
 
-
-<form class='ui form' id='UserForm' method="POST" action="/invite_friend/{{league}}">
+<form class="ui  form submit-form" name="information" id='UserForm' method="POST" action="/invite_friend/{{league}}">
     {{ form.hidden_tag() }}
-    <div id="contain">
-        {{ form.email.label }}
-        {{ form.email }}
+    <div class="form-group">
+        <div id="contain">
+        <div class="ui medium header">
+            {{ form.email.label }}
+        </div>
+        <div id="div_0" class="eight wide field">
+            <div class="ui input">
+                <input placeholder="email..." id="email_0" name="email" type="email" value="">
+            </div>
+        </div>
+        </div>
     </div>
         <br>
 
@@ -24,40 +30,60 @@
             <i class="plus icon"></i>
           </div>
         </div>
-        <input class="ui button" id="submit" name="submit" type="submit" value="Submit">
-    </div>
+        <input class="ui submit button" id="submit" name="submit" type="submit" value="Submit">
 
+    </div>
+    <div class="ui error message"></div>
 
 </form>
 
-    <script>
-        var count = 1;
-        $(function() {
-            $('#add').click(function() {addFields();});
-        });
-        $(function() {
-            $('#remove').click(function() {removeFields();});
-        });
+<script>
+    var count = 1;
+    $(function() {
+        $('#add').click(function() {addFields();});
+    });
+    $(function() {
+        $('#remove').click(function() {removeFields();});
+    });
 
-        function addFields(){
-            var html = `<input id="email_${count}" name="email_${count}" type="text" value="">`;
-            $('#contain').append(html);
-            count++;
+    function addFields(){
+        var html = `<div id="div_${count}" class="eight wide field">
+                        <div class="ui input">
+                            <input placeholder="email..." id="email_${count}" name="email" type="email" value="">
+                        </div>
+                    </div>`;
+        $('#contain').append(html);
+        count++;
+    }
+    function removeFields() {
+        count--;
+        var html = `div_${count}`;
+        $('#'+html).remove();
+
+    }
+    $("#submitForm").click(function() {
+        var test1=[];
+        var test = $('[id^="email_"]');
+        $.each(test, function(index, value){
+            test1.push($(this).html())
+        });
+    });
+     $('form')
+       .form({
+          inline : true,
+          on: 'change',
+          fields: {
+           email: {
+                identifier  : 'email',
+                rules: [
+                      {
+                            type   : 'email',
+                            prompt : 'Please put the valid email address'
+                      }
+                ]
+            }
         }
-        function removeFields() {
-            count--;
-            var html = `email_${count}`;
-            $('#'+html).remove();
+    });
 
-        }
-        $("#submitForm").click(function() {
-            var test1=[];
-            var test = $('[id^="email_"]');
-            $.each(test, function(index, value){
-                test1.push($(this).html())
-            });
-        });
-
-
-    </script>
+</script>
 {% endblock %}

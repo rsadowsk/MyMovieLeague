@@ -47,7 +47,10 @@ class ManageUsersMovies(FlaskForm):
 
 
 class InviteFriends(FlaskForm):
-    email = StringField("Email", id="email_0", validators=[validators.DataRequired(), validators.Email()])
+    email = StringField("Email", id="email_0",
+                        validators=[validators.DataRequired(), validators.Email()],
+                        description="email...")
+
     submit = SubmitField("Invite")
 
 

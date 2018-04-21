@@ -4,6 +4,7 @@ from collections import OrderedDict
 from MovieDb import InteractWithMovieDb
 from GetMovieList import GetMovieList
 from testemail import SendEmail
+import re
 import json
 
 
@@ -67,7 +68,10 @@ class MLScripts(object):
     def jsonify(input):
         unjsonified = {}
         for i in input:
-            unjsonified[i[0]] = i[1]
+            a = i[1].replace('"', "'")
+            a = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff]', '', a)
+            unjsonified[i[0]] = a
+
         return json.dumps(unjsonified)
 
     def handle_add_user_token(self, token):

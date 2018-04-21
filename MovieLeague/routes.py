@@ -192,11 +192,9 @@ def invite_friend(league):
     form = InviteFriends()
     if request.method == 'POST':
         v = request.form.to_dict(flat=False)
-        data = [value for key, value in v.items() if 'email' in key.lower()]
-        emails =[]
-        for i in data:
-            emails.append(i[0])
+        emails = v['email']
         sender = session["json"]["name"]
+        print emails
         scripts.send_invite_friend_email(sender, league, emails)
 
 
@@ -210,6 +208,10 @@ def invite_friend(league):
 @app.route('/add_user/<token>')
 def add_user(token):
     pass
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 
 def main():

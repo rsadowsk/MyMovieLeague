@@ -117,6 +117,7 @@ class InteractWithMovieDb(object):
         movie_list = []
         cur = self.db.cursor()
         insert_stmt = ("select %s_movies.movie_title, "
+                       "%s_movies.release_date, "
                        "%s_movies.foreign_gross, "
                        "%s_movies.domestic_gross, "
                        "%s_movies.worldwide_gross "
@@ -124,7 +125,7 @@ class InteractWithMovieDb(object):
                         "join %s_movies "
                          "on %s.movie_id = %s_movies.id "
                        "where %s.user_id=%s")
-        data = (league, league, league, league, league, league, league, league, league, user_id)
+        data = (league, league, league, league, league, league, league, league, league, league, user_id)
         insert = insert_stmt % data
         cur.execute(insert)
         movies = cur.fetchall()

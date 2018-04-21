@@ -1,9 +1,9 @@
 function addinputFields(users, movies){
     var TopDiv = document.createElement('div');
-    TopDiv.className = "equal width fields";
-    TopDiv.id = "equalqwidthfields";
+    TopDiv.className = "fields";
+    TopDiv.id = "equalqwidthfields_"+count;
     var InnerDiv = document.createElement('div');
-    InnerDiv.className = "field";
+    InnerDiv.className = "eight wide field";
     var secondInnerDiv = document.createElement('div');
     secondInnerDiv.className = "ui search selection dropdown";
     var firstInput = document.createElement('input');
@@ -22,7 +22,6 @@ function addinputFields(users, movies){
     var fourthInnerDiv = document.createElement('div');
     fourthInnerDiv.className = "menu";
     fourthInnerDiv.setAttribute("tabindex", "-1");
-    console.log(users.replace(/&#34;/g,'"'));
     JSON.parse(users.replace(/&#34;/g,'"'), function(key, value) {
         if (key.length > 0) {
             var forDiv = document.createElement('div');
@@ -34,7 +33,7 @@ function addinputFields(users, movies){
         }
     );
     var InnerDiv_m = document.createElement('div');
-    InnerDiv_m.className = "field";
+    InnerDiv_m.className = "seven wide field";
     var secondInnerDiv_m = document.createElement('div');
     secondInnerDiv_m.className = "ui search selection dropdown";
     var firstInput_m = document.createElement('input');
@@ -53,7 +52,6 @@ function addinputFields(users, movies){
     var fourthInnerDiv_m = document.createElement('div');
     fourthInnerDiv_m.className = "menu";
     fourthInnerDiv_m.setAttribute("tabindex", "-1");
-    console.log(movies.replace(/&#34;/g,'"'));
     JSON.parse(movies.replace(/&#34;/g,'"'), function(key, value) {
         if (key.length > 0) {
             var forDiv = document.createElement('div');
@@ -64,6 +62,24 @@ function addinputFields(users, movies){
             }
         }
     );
+
+    var removeDiv = document.createElement('div');
+    removeDiv.className = "one wide field";
+    /*var removeButton = document.createElement('button');
+    removeButton.className = "ui icon button";
+    removeButton.id = "remove_".concat(count);
+    removeButton.onclick = function() {alert('hi')}*/
+    var removeIcon = document.createElement('i');
+    removeIcon.className = "big minus square outline icon";
+    removeIcon.onclick = function() {
+        var elem = TopDiv.id;
+        $('#'+elem).remove();
+    };
+    //removeButton.appendChild(removeIcon);
+    //removeDiv.appendChild(removeButton);
+    removeDiv.appendChild(removeIcon)
+
+
     secondInnerDiv.appendChild(firstInput);
     secondInnerDiv.appendChild(icon);
     secondInnerDiv.appendChild(secondInput);
@@ -79,11 +95,15 @@ function addinputFields(users, movies){
     secondInnerDiv_m.appendChild(fourthInnerDiv_m);
     InnerDiv_m.appendChild(secondInnerDiv_m);
     TopDiv.appendChild(InnerDiv_m);
+
+    TopDiv.appendChild(removeDiv);
+
     count++;
     formgroup.appendChild(TopDiv);
+
     $(function() {
-    $('.ui.dropdown')
-        .dropdown();
-});
+        $('.ui.dropdown')
+            .dropdown();
+    });
 }
 

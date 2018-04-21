@@ -45,7 +45,7 @@ class GetMyMovies(object):
         ft = self.get_my_foreign_total()
         dt = self.get_my_domestic_total()
         wt = self.get_my_worldwide_total()
-        return ["Total", ft, dt, wt]
+        return ["Total","", ft, dt, wt]
 
     def convert_int_to_dollar(self, dollar):
         return '${:,}'.format(dollar)
