@@ -289,6 +289,29 @@ class InteractWithMovieDb(object):
         cur.execute(insert)
         return cur.fetchall()
 
+    def get_used_movies(self):
+        """select testleague3_movies.movie_id from testleague3
+              join testleague3_movies on testleague3.movie_id=testleague3_movies.id
+            Union
+            select TestLeague5_movies.movie_id from TestLeague5
+              join TestLeague5_movies on TestLeague5.movie_id=TestLeague5_movies.id"""
+        pass
+
+    def get_leagues_to_update(self):
+        cur = self.db.cursor()
+        insert = ("select league_name from leagues where end_record > CURRENT_DATE")
+        cur.execute(insert)
+        return cur.fetchall()
+
+    def get_movies_to_update(self, league):
+        cur = self.db.cursor()
+        insert_stmt = ("select %s_movies.movie_id from %s "
+                       "join %s_movies where %s_movies.id=%s.movie_id")
+        data = (league, league, league, league, league)
+        insert = insert_stmt % data
+        cur.execute(insert)
+        return cur.fetchall()
+
     def convert_dollar_to_int(self, dollar):
         dollar = dollar.replace("$", "")
         dollar = dollar.replace(",", "")
@@ -311,4 +334,4 @@ class InteractWithMovieDb(object):
 
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_league_totals_for_all_users('testleague3')
+    print db.get_movies_to_update('testleague4')

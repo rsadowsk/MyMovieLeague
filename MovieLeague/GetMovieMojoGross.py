@@ -112,6 +112,11 @@ class GetMovieData(object):
                self.worldwide_gross_string,\
                self.release_date_date
 
+    def get_update_info(self):
+        self.find_movie_info()
+        self.find_movie_gross()
+        return self.get_movie_data_strings()
+
     @staticmethod
     def strip_stuff(stuff):
         bad_stuff = ["+", "=", "\xc2", "\xa0", "\xc2"]
@@ -128,8 +133,5 @@ def strip_tags(html):
 
 
 if __name__=='__main__':
-    movie = GetMovieData('eighthoursdontmakeaday')
-    #movie = GetMovieData('wonderwoman')
-    movie.find_movie_info()
-    movie.find_movie_gross()
-    print movie.get_movie_data_strings()
+    movie = GetMovieData('pixar1117')
+    print movie.get_update_info()

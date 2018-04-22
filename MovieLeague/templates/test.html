@@ -1,50 +1,6 @@
 {% extends "UserLayout.html" %}
 {% block content %}
 
-<form class="ui  form submit-form" name="information">
-        <div class="ui  two fields">
-            <div class="eight wide  field">
-                <label>email 1</label>
-                <input name="email" type="email" id="email_1" placeholder="email">
-            </div>
-            <div class="eight wide field">
-                <label>email 2</label>
-                <input name="email" type="email" id="email_2" placeholder="email">
-            </div>
-        </div>
-        <div class="ui  two fields">
-            <div class="eight wide field">
-                <label>email 3</label>
-                <input name="email" type="email" id="email_3" placeholder="email">
-            </div>
-        </div>
-    <button class="ui left floated orange submit button" type="submit" id="submit-btn">submit</button>
-    </form>
-<script>
 
- $('form')
-       .form({
-          inline : true,
-          on: 'change',
-          fields: {
-           email: {
-                identifier  : 'email',
-                rules: [
-                      {
-                            type   : 'email',
-                            prompt : 'Please put the valid email address'
-                      }
-                ]
-            }
-        }
-    })
-    $('#submit-btn').click(function () {
-        $('form').form('validate form');
-        $('form').form('is valid', function () {
-            $('form').form('submit');
-        });
-
-    });
-</script>
 
 {% endblock %}

@@ -10,7 +10,7 @@ class SendEmail(object):
         self.sg = SGMail
 
     def send_invite_email(self, sender, league, to_email):
-        from_email = Email("no-reply@movieleague.co.uk")
+        from_email = Email("no-reply@mymovieleague.com")
         to_email = Email(to_email)
         subject = "Invite to join %s" % league
         content = Content("text/plain", "%s has invited you to join %s") % sender, league

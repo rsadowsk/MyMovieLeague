@@ -7,6 +7,10 @@
         "runtime": "python2.7", 
         "s3_bucket": "zappa-rsjt6l2j6",
         "certificate_arn": "arn:aws:acm:us-east-1:503748839562:certificate/2fccd73e-7417-44eb-ad4c-be950dee46a0",
-        "domain": "www.mymovieleague.com"
+        "domain": "www.mymovieleague.com",
+        "events": [{
+           "function": "Movieleague.UpdateMovies",
+           "expression": "cron(0 1 * * ? *)"
+       }]
     }
 }
