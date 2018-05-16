@@ -1,4 +1,53 @@
 {% extends "UserLayout.html" %}
 {% block content %}
-<h1> {{ league }}</h1>
+
+    <div class="ui top attached tabular menu">
+    {% for player in league_info %}
+        {% if loop.index == 1 %}
+        <a class="item active" data-tab="{{ player|title }}">{{ player|title }}</a>
+        {% else %}
+        <a class="item" data-tab="{{ player|title }}">{{ player|title }}</a>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    {% for player in league_info %}
+            {% if loop.index == 1 %}
+            <div class="ui bottom attached active tab segment" data-tab="{{ player|title }}">
+            {% else %}
+            <div class="ui bottom attached tab segment" data-tab="{{ player|title }}">
+            {% endif %}
+            <table class="ui sortable fixed celled table">
+              <thead>
+                <tr>
+                  <th class="">Movie Title</th>
+                  <th class="">Release Date</th>
+                  <th class="">Foreign Gross</th>
+                  <th class="">Domestic Gross</th>
+                  <th class="sorted descending">Worldwide Gross</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for movie_info in league_info[player] %}
+                <tr>
+                    {% for data in movie_info %}
+                        <td>
+                            {{ data }}
+                        </td>
+                    {% endfor %}
+
+                </tr>
+            {% endfor %}
+              </tbody>
+            </table>
+            </div>
+    {% endfor %}
+
+    <script>
+    $(function() {
+        $('.menu .item')
+          .tab()
+        ;
+    });
+    </script>
 {% endblock %}

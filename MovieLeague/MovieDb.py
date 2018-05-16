@@ -299,7 +299,7 @@ class InteractWithMovieDb(object):
 
     def get_leagues_to_update(self):
         cur = self.db.cursor()
-        insert = ("select league_name from leagues where end_record > CURRENT_DATE")
+        insert = ("select league_name from leagues where end_record >= CURRENT_DATE")
         cur.execute(insert)
         return cur.fetchall()
 
@@ -332,6 +332,26 @@ class InteractWithMovieDb(object):
             total[i] = self.convert_int_to_dollar(total[i])
         return total
 
+    def get_league_users_and_movies(self, league):
+        """
+        SELECT users.user_name, %s_movies.movie_id
+        FROM %s JOIN %s_movies, users
+        WHERE %s_movies.id=%s.movie_id and %s.user_id=users.id
+        """
+        cur = self.db.cursor()
+        insert_stmt = ("SELECT users.user_name, "
+                       "%s_movies.movie_title, "
+                       "%s_movies.release_date, "
+                       "%s_movies.foreign_gross, "
+                       "%s_movies.domestic_gross, "
+                       "%s_movies.worldwide_gross "
+                       "FROM %s JOIN %s_movies, users "
+                       "WHERE %s_movies.id=%s.movie_id and %s.user_id=users.id")
+        data = (league, league, league, league, league, league, league, league, league, league)
+        insert = insert_stmt % data
+        cur.execute(insert)
+        return cur.fetchall()
+
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_movies_to_update('testleague4')
+    print db.get_league_users_and_movies('TestLeague5')

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Uni Sans Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Uni Sans Thin'), url('../fonts/Uni Sans Thin.otf') format('otf');
+}
+
+body{
+  font-family: "Uni Sans Thin";
+}

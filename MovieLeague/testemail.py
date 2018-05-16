@@ -3,7 +3,6 @@ from sendgrid.helpers.mail import *
 from itsdangerous import URLSafeSerializer
 
 
-
 class SendEmail(object):
     def __init__(self):
         self.serial = URLSafeSerializer(app.config["SECRET_KEY"])
@@ -13,7 +12,7 @@ class SendEmail(object):
         from_email = Email("no-reply@mymovieleague.com")
         to_email = Email(to_email)
         subject = "Invite to join %s" % league
-        content = Content("text/plain", "%s has invited you to join %s") % sender, league
+        content = Content("text/plain", "%s has invited you to join %s" % (sender, league))
         mail = Mail(from_email, subject, to_email, content)
         response = self.sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)

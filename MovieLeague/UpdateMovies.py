@@ -23,7 +23,7 @@ def main():
                 _domestic = s.convert_dollar_to_int(domestic_gross)
                 worldwide_gross = sum([_foreign, _domestic])
                 worldwide_gross = s.convert_int_to_dollar(worldwide_gross)
-            print 'Updating %s in db' % movie_title
+            print 'Updating %s in %s' % (movie_title, league[0])
             db.update_movie_gross(league[0], foreign_gross, domestic_gross, worldwide_gross, movie_id)
 
 

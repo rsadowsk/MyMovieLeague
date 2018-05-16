@@ -82,6 +82,21 @@
   <!-- Site Properties -->
   <title>My Movie League</title>
   <style type="text/css">
+    div.ui.text.container {
+        margin-top: 2em;
+        margin-bottom: 0em;
+        font-size: 4em;
+        font-weight: normal;
+    }
+    img.logo {
+        width:400px;
+        display: block;
+        margin: 0 auto;
+        height: 100%;
+        align-content: center;
+        vertical-align: middle;
+
+    }
 
     .hidden.menu {
       display: none;
@@ -206,11 +221,10 @@
   <div class="ui inverted vertical masthead center aligned segment">
 
 
-    <div class="ui text container">
-      <h1 class="ui inverted header">
-        My Movie League
-      </h1>
-      <h2>Do whatever you want when you want to.</h2>
+    <div class="ui text container" id="jumbotron">
+
+        <img class="logo" src="{{ url_for('static', filename='img/square_gold.png') }}">
+
       <button class="ui google plus huge primary button">
           <i class="google plus icon"></i>
          <a href="{{url_for('google_signup') }}" >Sign up Google</a>

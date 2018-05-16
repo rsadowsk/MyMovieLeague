@@ -6,6 +6,7 @@ from GetMovieList import GetMovieList
 from testemail import SendEmail
 import re
 import json
+import datetime
 
 
 class MLScripts(object):
@@ -104,10 +105,23 @@ class MLScripts(object):
             my_movies[league] = league_info
         return my_movies
 
+    @staticmethod
+    def get_full_league_stats(league):
+        movie_db = InteractWithMovieDb()
+        rtn_list = {}
+        for i in movie_db.get_league_users_and_movies(league):
+            lst = list(i)
+            for a in lst:
+                if isinstance(a, datetime.date):
+                    lst[lst.index(a)] = a.strftime('%Y-%m-%d')
+            if lst[0] not in rtn_list:
+                rtn_list[lst[0]] = []
+                rtn_list[lst[0]].append(lst[1:])
+            else:
+                rtn_list[lst[0]].append(lst[1:])
+        return rtn_list
+
 
 if __name__=='__main__':
     mls = MLScripts()
-    a = mls.get_all_league_movies('testleague3', json=True)
-    for i in a:
-        print i, a[i]
-
+    mls.get_full_league_stats("TestLeague5")

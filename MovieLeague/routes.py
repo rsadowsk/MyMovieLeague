@@ -9,8 +9,11 @@ from MovieLeague import app
 
 
 # TODO hide clientID and SecretID
-GOOGLE_CLIENT_ID = '673324906508-b74o41ni8jj5b1lnaebrg771ak04ql69.apps.googleusercontent.com'
+GOOGLE_CLIENT_ID = app.config['GOOGLE_ID']
 GOOGLE_CLIENT_SECRET = app.config['GOOGLE_SECRET']
+ALPHA = app.config['ALPHA']
+BETA = app.config['BETA']
+LIVE = app.config['LIVE']
 
 REDIRECT_URI = '/oauth2callback'  # one of the Redirect URIs from Google APIs console
 
@@ -123,8 +126,9 @@ def leagues():
     if session.get('access_token') is None:
         return render_template("index.html")
     elif request.method == "GET":
-        leagues = scripts.get_leagues(session["json"]["name"])
-        return render_template("leagues.html", leagues=leagues)
+        #leagues = scripts.get_leagues(session["json"]["name"])
+        my_movies = scripts.my_movies_league_totals_info(session['json'])
+        return render_template("leagues.html", my_movies=my_movies)
 
 
 @app.route("/league/<string:league>")
@@ -132,7 +136,8 @@ def league(league):
     if session.get('access_token') is None:
         return render_template("index.html")
     elif request.method == "GET":
-        return render_template("league.html", league=league)
+        league_info = scripts.get_full_league_stats(league)
+        return render_template("league.html", league_info=league_info, league=league)
 
 
 @app.route("/manage/<string:league>", methods=["GET", "POST"])
@@ -191,17 +196,13 @@ def invite_friend(league):
         return render_template("index.html")
     form = InviteFriends()
     if request.method == 'POST':
-        v = request.form.to_dict(flat=False)
-        emails = v['email']
+        info = request.form.to_dict(flat=False)
+        emails = info['email']
         sender = session["json"]["name"]
-        print emails
+        if ALPHA:
+            return redirect(url_for('under_construction'))
         scripts.send_invite_friend_email(sender, league, emails)
 
-
-        if not form.validate():
-            return render_template('invite_friend.html', league=league, form=form)
-        else:
-            return render_template('invite_friend.html', league=league, form=form)
     elif request.method == 'GET':
         return render_template('invite_friend.html',league=league, form=form)
 

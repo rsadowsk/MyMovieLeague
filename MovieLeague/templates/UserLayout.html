@@ -5,13 +5,14 @@
     <div class="ui grid">
       <div class="two wide column"></div>
       <div class="twelve wide column">
-          <header>
-            <div class="container">
-              <h1 class="title">My Movie League</h1>
-            </div>
-          </header>
+          <div class="ui inverted segment">
 
-          <div class="ui secondary pointing menu">
+          <div class="ui secondary inverted pointing menu">
+            <header>
+
+              <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
+
+            </header>
             <a class="item" href="{{ url_for('home') }}">
               Home
             </a>
@@ -27,6 +28,7 @@
               </a>
             </div>
           </div>
+        </div>
 
             {% block content %}
             {% endblock %}

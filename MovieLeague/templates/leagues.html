@@ -1,26 +1,50 @@
 {% extends "UserLayout.html" %}
 {% block content %}
 <div class="ui relaxed divided list">
-    {% for league in leagues %}
-        {% if league|length > 1 %}
-            <div class="item">
-                <i class="large film middle aligned icon"></i>
-                    <div class="middle aligned content">
-                    <a class="ui left aligned header" href="league/{{league[0]}}">{{ league[0] }}</a>
-                    </div>
-                    <div class="middle aligned content">
-                    <a class="ui right aligned header" href="manage/{{league[0]}}">Manage</a>
-                    </div>
-            </div>
-        {% elif league|length == 1 %}
-            <div class="item">
-                <i class="large film middle aligned icon"></i>
-                <div class="content">
-                <a class="header" href="league/{{league}}">{{ league }}</a>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+
+{% for league in my_movies %}
+    <table class="ui celled striped table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    {% if league|length > 1 %}
+                        <div class="ui right aligned grid">
+                            <div class="left aligned six wide column">
+                                <a class="ui header" href="league/{{league}}">{{ league|title }}</a>
+                            </div>
+                            <div class="right floated right aligned six wide column">
+                                <a class="ui header" href="manage/{{league}}">Manage</a>
+                            </div>
+                            </div>
+                    {% elif league|length == 1 %}
+                        <div class="item">
+                            <i class="large film middle aligned icon"></i>
+                            <div class="content">
+                                <a class="header" href="league/{{league}}">{{ league }}</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for item in my_movies[league] %}
+                    <tr>
+                        <td>
+                            {{ item|title }}
+                        </td>
+                        <td>
+                            {{ my_movies[league][item] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+{% endfor %}
+
 </div>
+
+
+
 <a class="ui button" href="{{ url_for('create_league') }}">Create League</a>
 {% endblock %}
