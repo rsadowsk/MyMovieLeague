@@ -1,14 +1,14 @@
 import pymysql.cursors, os
-from Var import Var as v
+from MovieLeague import app
 # TODO APP script
 
 
 class InteractWithUsersDb(object):
     def __init__(self):
         # TODO hide username and password
-        self.db = pymysql.connect(host=v.db_host,
-                             user=v.db_user,
-                             passwd=v.db_pass,
+        self.db = pymysql.connect(host=app.config['DB_HOST'],
+                             user=app.config['DB_USER'],
+                             passwd=app.config['DB_PASS'],
                              db="movieleagetest")
 
     def check_if_user_exists(self, user):
