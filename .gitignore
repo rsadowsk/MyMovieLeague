@@ -3,3 +3,4 @@ app_config.py
 client_secret.json
 credentials.json
 install
+/app_config.py

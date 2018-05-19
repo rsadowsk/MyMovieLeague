@@ -8,7 +8,6 @@ from forms import CreateLeagueForm, ManageUsersMovies, InviteFriends
 from MovieLeague import app
 
 
-# TODO hide clientID and SecretID
 GOOGLE_CLIENT_ID = app.config['GOOGLE_ID']
 GOOGLE_CLIENT_SECRET = app.config['GOOGLE_SECRET']
 ALPHA = app.config['ALPHA']
