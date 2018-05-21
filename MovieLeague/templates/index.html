@@ -90,8 +90,9 @@
     }
 
     .ui.inverted.segment, .ui.primary.inverted.segment {
-        background: lightblue URL("{{ url_for('static', filename='img/bg_film.jpg') }}") no-repeat center;
-        background-size:     cover;      
+        /*background: black URL("{{ url_for('static', filename='img/bg_film.jpg') }}") no-repeat center;*/
+        background: black URL("{{ url_for('static', filename='img/bg_1.jpg') }}") no-repeat center;
+        background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center;
     }
@@ -230,8 +231,7 @@
 
     <div class="ui text container" id="jumbotron">
 
-        <img class="logo" src="{{ url_for('static', filename='img/square_gold.png') }}">
-
+        <img class="logo" src="{{ url_for('static', filename='img/square_black.png') }}">
       <button class="ui google plus huge primary button">
           <i class="google plus icon"></i>
          <a href="{{url_for('google_signup') }}" >Sign up Google</a>
