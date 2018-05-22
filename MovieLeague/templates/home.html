@@ -4,30 +4,50 @@
         <h2 class="ui large header">Home</h2>
         <h3 class="ui medium header">Welcome {{ name }}</h3>
         <script type="text/javascript" language="javascript" src="http://www.boxofficemojo.com/data/js/wknd5.php"></script>
-        <script type="text/javascript" language="javascript" src="http://www.boxofficemojo.com/data/js/wknd5.php?h=myclass1&r=myclass2"></script>
-        <script type="text/javascript" language="javascript" src="http://www.boxofficemojo.com/data/js/moviegross.php?id=starwars3.htm&shortgross=0"></script>
 
         {% for league in my_movies %}
-            <table class="ui celled striped table">
+            <h3>{{ league|title }}</h3>
+            <table class="ui celled fixed striped table">
+
             <thead>
-                <tr>
-                    <th colspan="3">
-                        <div>{{ league|title }}</div>
-                    </th>
-                </tr>
+                    <th class="one wide"></th>
+                    <th>Raking</th>
+                    <th>Total</th>
             </thead>
+            {% if my_movies[league][0][0] != "No Winner" %}
             <tbody>
-            {% for item in my_movies[league] %}
                 <tr>
+                    <td>Leader</td>
                     <td>
-                        {{ item|title }}
+                        {{ my_movies[league][0][0]|title }}
                     </td>
                     <td>
-                        {{ my_movies[league][item] }}
+                        {{ my_movies[league][0][1]|title }}
                     </td>
                 </tr>
-            {% endfor %}
+                <tr>
+                    <td>You</td>
+                    <td>
+                        {{ my_movies[league][1][0]|title }}
+                    </td>
+                    <td>
+                        {{ my_movies[league][1][1]|title }}
+                    </td>
+                </tr>
             </tbody>
+            {% else %}
+            <tbody>
+                <tr>
+                    <td>Leader</td>
+                    <td>
+                        {{ my_movies[league][1][0]|title }}
+                    </td>
+                    <td>
+                        {{ my_movies[league][1][1]|title }}
+                    </td>
+                </tr>
+            </tbody>
+            {% endif %}
             </table>
         {% endfor %}
     </div>

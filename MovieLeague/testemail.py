@@ -12,7 +12,8 @@ class SendEmail(object):
         from_email = Email("no-reply@mymovieleague.com")
         to_email = Email(to_email)
         subject = "Invite to join %s" % league
-        content = Content("text/plain", "%s has invited you to join %s" % (sender, league))
+        content = Content("text/plain", "%s has invited you to join %s\n"
+                                        "https://www.mymovieleague.com/add_user/%s" % (sender, league, self.token_dump(league)))
         mail = Mail(from_email, subject, to_email, content)
         response = self.sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
@@ -27,7 +28,4 @@ class SendEmail(object):
 
 if __name__ == '__main__':
     se = SendEmail()
-    a = 'test'
-    token = se.token_dump(a)
-    print token
-    print se.token_load('InRlc3RlZCI.-BiqYaFjRr4pDK6CJk99sAWBLxY')
+    se.send_invite_email("TestPlayer1","testleague","richard.j.sadowski@gmail.com")

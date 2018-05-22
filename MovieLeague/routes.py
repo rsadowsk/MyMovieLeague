@@ -116,7 +116,7 @@ def home():
     if session.get('access_token') is None:
         return render_template("index.html")
     name = session["json"]["given_name"]
-    my_movies = scripts.my_movies_league_totals_info(session['json'])
+    my_movies = scripts.my_leagues_rankings(session['json'])
     return render_template("home.html", my_movies=my_movies, name=name)
 
 
@@ -207,7 +207,7 @@ def invite_friend(league):
 
 @app.route('/add_user/<token>')
 def add_user(token):
-    pass
+    return("Token was: %s" % token)
 
 @app.route('/test')
 def test():

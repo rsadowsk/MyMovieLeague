@@ -4,6 +4,7 @@ from collections import OrderedDict
 from MovieDb import InteractWithMovieDb
 from GetMovieList import GetMovieList
 from testemail import SendEmail
+from AppScripts import Scripts
 import re
 import json
 import datetime
@@ -121,7 +122,38 @@ class MLScripts(object):
                 rtn_list[lst[0]].append(lst[1:])
         return rtn_list
 
+    @staticmethod
+    def my_leagues_rankings(user_info):
+        my_movies = OrderedDict()
+        db = InteractWithUsersDb()
+        movie_db = InteractWithMovieDb()
+        id = db.get_user_info(user_info["name"])[0][0]
+        leagues = movie_db.get_users_leagues(str(id))
+        for league in leagues:
+            winner = ['No Winner', 0]
+            me = [user_info["name"], 0]
+
+            league_info = movie_db.get_league_totals_for_all_users(league)
+            for i in league_info:
+                entry = Scripts.convert_dollar_to_int(league_info[i])
+                if entry > winner[1]:
+
+                    winner = [i, entry]
+                if i == user_info["name"]:
+                    me = [i, entry]
+            if me == winner:
+                me[1] = Scripts.convert_int_to_dollar(me[1])
+                my_movies[league] = me
+            elif me != winner:
+                print winner[1]
+                winner[1] = Scripts.convert_int_to_dollar(winner[1])
+                print winner[1]
+                me[1] = Scripts.convert_int_to_dollar(me[1])
+                my_movies[league] = [winner, me]
+        return my_movies
 
 if __name__=='__main__':
     mls = MLScripts()
-    mls.get_full_league_stats("TestLeague5")
+    json = {u'family_name': u'Sadowski', u'name': u'Richard Sadowski', u'picture': u'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', u'gender': u'male', u'email': u'richard.j.sadowski@gmail.com', u'link': u'https://plus.google.com/111887332429616518308', u'given_name': u'Richard', u'id': u'111887332429616518308', u'verified_email': True}
+    a=mls.my_leagues_rankings(json)
+    print a
