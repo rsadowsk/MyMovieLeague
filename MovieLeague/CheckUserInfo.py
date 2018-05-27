@@ -9,7 +9,7 @@ class InteractWithUsersDb(object):
         self.db = pymysql.connect(host=app.config['DB_HOST'],
                              user=app.config['DB_USER'],
                              passwd=app.config['DB_PASS'],
-                             db="movieleagetest")
+                             db=app.config['DB_MOVIEDB'])
 
     def check_if_user_exists(self, user):
         cur = self.db.cursor()

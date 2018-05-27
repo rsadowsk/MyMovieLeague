@@ -1,13 +1,13 @@
-{% extends "UserLayout.html" %}
-{% block content %}
-
+<!DOCTYPE html>
+<html lang="en">
+<body>
 <div style="width:600px;height:400px;background:black">
     <br>
-    <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:300px;height:100px;display: block;margin:auto;">
+    <img src="https://s3.eu-west-2.amazonaws.com/mymovieleaguecompanymedia/long_gold.png" style="width:300px;height:100px;display: block;margin:auto;">
     <br>
     <h4 style="color:#E7BE49;text-align: center"> {{ sender }} has invited you to join {{ league }} on MyMovieLeague.com</h4>
     <br>
     <button style="color:#E7BE49;display:block;margin: 0 auto" type="button" href="https://www.mymovieleague.com/add_user/{{ token }}">Join Now!</button>
 </div>
-
-{% endblock %}
+</body>
+</html>

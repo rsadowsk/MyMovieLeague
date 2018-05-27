@@ -42,8 +42,11 @@ def index():
 # ---GOOGLE SIGNUP CODE--- #
 @app.route('/google_signup')
 def google_signup():
+    print 'hi'
     db = InteractWithUsersDb()
+    print 'hi1'
     access_token = session.get('access_token')
+    print 'hi2'
     if access_token is None:
         return redirect(url_for('login'))
 

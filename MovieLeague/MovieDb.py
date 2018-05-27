@@ -10,7 +10,7 @@ class InteractWithMovieDb(object):
         self.db = pymysql.connect(host=app.config['DB_HOST'],
                              user=app.config['DB_USER'],
                              passwd=app.config['DB_PASS'],
-                             db="movieleagetest")
+                             db=app.config['DB_MOVIEDB'])
 
     def add_movie_to_db(self, *argv):
         args = []
