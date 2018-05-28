@@ -11,8 +11,8 @@ class SendEmail(object):
         self.template = "./template/email_template.html"
 
     def send_invite_email(self, sender, league, to_email):
-        j2_env=jinja2.Environment(loader=jinja2.FileSystemLoader('templates'), trim_blocks=True)
-        template=j2_env.get_template('email_template.html')
+        j2_env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'), trim_blocks=True)
+        template = j2_env.get_template('email_template.html')
         from_email = Email("no-reply@mymovieleague.com")
         to_email = Email(to_email)
         subject = "Invite to join %s" % league
@@ -34,4 +34,4 @@ class SendEmail(object):
 
 if __name__ == '__main__':
     se = SendEmail()
-    se.send_invite_email("TestPlayer1","testleague","richard.j.sadowski@gmail.com")
+    se.send_invite_email("TestPlayer1", "testleague", "richard.j.sadowski@gmail.com")

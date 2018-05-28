@@ -6,7 +6,7 @@
         "profile_name": "default", 
         "project_name": "fantasymovieleague",
         "runtime": "python2.7",
-        "certificate_arn": "arn:aws:acm:us-east-1:493225519480:certificate/3e3f554d-e7d4-40d0-a7ec-a6828bb51d9f",
+        "certificate_arn": "arn:aws:acm:us-east-1:493225519480:certificate/2a710344-3675-494b-8b43-365af34a5026",
         "route53_enabled": true,
         "domain": "dev.mymovieleague.com",
         "events": [{
@@ -22,7 +22,7 @@
         "profile_name": "default",
         "project_name": "fantasymovieleague",
         "runtime": "python2.7",
-        "certificate_arn": "arn:aws:acm:us-east-1:493225519480:certificate/3e3f554d-e7d4-40d0-a7ec-a6828bb51d9f",
+        "certificate_arn": "arn:aws:acm:us-east-1:493225519480:certificate/025c1e93-33c1-4091-9e76-628d20aecbf4",
         "route53_enabled": true,
         "domain": "www.mymovieleague.com",
         "events": [{

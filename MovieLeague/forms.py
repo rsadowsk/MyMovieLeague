@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, HiddenField
+from wtforms import StringField, SubmitField, HiddenField, PasswordField, BooleanField
 from wtforms.fields.html5 import DateField
 from wtforms import validators, ValidationError
+from wtforms.validators import InputRequired, Email, Length
 
 
-def validate_date(form, field):
+def validate_date(field):
     year = field.data.year
     if int(year) < 2015:
         raise ValidationError('Year must be after 2015')
@@ -50,9 +51,19 @@ class InviteFriends(FlaskForm):
     email = StringField("Email", id="email_0",
                         validators=[validators.DataRequired(), validators.Email()],
                         description="email...")
-
     submit = SubmitField("Invite")
 
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('remember me')
+
+
+class RegisterForm(FlaskForm):
+    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 if __name__=='__main__':
     pass

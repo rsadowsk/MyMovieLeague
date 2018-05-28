@@ -1,6 +1,16 @@
 import pymysql.cursors, os
-from MovieLeague import app
+from MovieLeague import app, db
+from flask_login import UserMixin
 # TODO APP script
+
+
+class users(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(20), unique=True, nullable=False)
+    user_given_name = db.Column(db.String(20), nullable=False)
+    user_family_name = db.Column(db.String(20), nullable=False)
+    user_email = db.Column(db.String(50), nullable=False)
+    leagues = db.Column(db.String(100), nullable=False)
 
 
 class InteractWithUsersDb(object):

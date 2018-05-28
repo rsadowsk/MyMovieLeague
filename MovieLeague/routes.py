@@ -4,12 +4,12 @@ from CheckUserInfo import InteractWithUsersDb
 from flask_oauth import OAuth
 from scripts import MLScripts
 import json
-from forms import CreateLeagueForm, ManageUsersMovies, InviteFriends
-from MovieLeague import app
+from forms import CreateLeagueForm, ManageUsersMovies, InviteFriends, LoginForm
+from MovieLeague import app, login_manager
+from flask_login import login_user, login_required, logout_user, current_user
+from CheckUserInfo import users
 
 
-GOOGLE_CLIENT_ID = app.config['GOOGLE_ID']
-GOOGLE_CLIENT_SECRET = app.config['GOOGLE_SECRET']
 ALPHA = app.config['ALPHA']
 BETA = app.config['BETA']
 LIVE = app.config['LIVE']
@@ -27,8 +27,8 @@ google = oauth.remote_app('google',
                           access_token_url='https://accounts.google.com/o/oauth2/token',
                           access_token_method='POST',
                           access_token_params={'grant_type': 'authorization_code'},
-                          consumer_key=GOOGLE_CLIENT_ID,
-                          consumer_secret=GOOGLE_CLIENT_SECRET)
+                          consumer_key=app.config['GOOGLE_ID'],
+                          consumer_secret=app.config['GOOGLE_SECRET'])
 
 
 @app.route("/")
@@ -39,14 +39,16 @@ def index():
         return redirect(url_for('home'))
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return users.query.get(int(user_id))
+
+
 # ---GOOGLE SIGNUP CODE--- #
 @app.route('/google_signup')
 def google_signup():
-    print 'hi'
     db = InteractWithUsersDb()
-    print 'hi1'
     access_token = session.get('access_token')
-    print 'hi2'
     if access_token is None:
         return redirect(url_for('login'))
 
@@ -117,7 +119,7 @@ def my_movies():
 @app.route("/home")
 def home():
     if session.get('access_token') is None:
-        return render_template("index.html")
+        return redirect(url_for('google_signup'))
     name = session["json"]["given_name"]
     my_movies = scripts.my_leagues_rankings(session['json'])
     return render_template("home.html", my_movies=my_movies, name=name)
@@ -128,7 +130,6 @@ def leagues():
     if session.get('access_token') is None:
         return render_template("index.html")
     elif request.method == "GET":
-        #leagues = scripts.get_leagues(session["json"]["name"])
         my_movies = scripts.my_movies_league_totals_info(session['json'])
         return render_template("leagues.html", my_movies=my_movies)
 
@@ -159,6 +160,7 @@ def manage(league):
         movies, movies_json = scripts.get_all_league_movies(league, json=True)
         return render_template("manage.html", league=league, form=form, users=users,
                                users_json=users_json, movies=movies, movies_json=movies_json)
+
 
 @app.route('/UnderConstruction')
 def under_construction():
@@ -206,11 +208,16 @@ def invite_friend(league):
         scripts.send_invite_friend_email(sender, league, emails)
 
     elif request.method == 'GET':
-        return render_template('invite_friend.html',league=league, form=form)
+        return render_template('invite_friend.html', league=league, form=form)
+
 
 @app.route('/add_user/<token>')
 def add_user(token):
-    return("Token was: %s" % token)
+    if session.get('access_token') is None:
+        return redirect(url_for('google_signup'))
+    scripts.add_user_to_league_by_token(session['json'], token)
+    return render_template('added.html')
+
 
 @app.route('/test')
 def test():

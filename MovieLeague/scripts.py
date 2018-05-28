@@ -152,8 +152,15 @@ class MLScripts(object):
                 my_movies[league] = [winner, me]
         return my_movies
 
+    @staticmethod
+    def add_user_to_league_by_token(user_info, token):
+        db = InteractWithUsersDb()
+        id = db.get_user_info(user_info["name"])[0][0]
+        info = Scripts.token_load(token)
+        movie_db = InteractWithMovieDb()
+        movie_db.add_user_to_league_user(info, id)
+
 if __name__=='__main__':
     mls = MLScripts()
     json = {u'family_name': u'Sadowski', u'name': u'Richard Sadowski', u'picture': u'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', u'gender': u'male', u'email': u'richard.j.sadowski@gmail.com', u'link': u'https://plus.google.com/111887332429616518308', u'given_name': u'Richard', u'id': u'111887332429616518308', u'verified_email': True}
-    a=mls.my_leagues_rankings(json)
-    print a
+    mls.add_user_to_league_by_token(json, 'InRlc3RsZWFndWUi.uFMUfQ4R6O53Pz6j35PWkkcqEKw')
