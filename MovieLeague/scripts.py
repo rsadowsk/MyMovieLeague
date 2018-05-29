@@ -136,22 +136,18 @@ class MLScripts(object):
         for league in leagues:
             winner = ['No Winner', 0]
             me = [user_info["name"], 0]
-
             league_info = movie_db.get_league_totals_for_all_users(league)
             for i in league_info:
                 entry = Scripts.convert_dollar_to_int(league_info[i])
                 if entry > winner[1]:
-
                     winner = [i, entry]
                 if i == user_info["name"]:
                     me = [i, entry]
             if me == winner:
                 me[1] = Scripts.convert_int_to_dollar(me[1])
-                my_movies[league] = me
+                my_movies[league] = [me]
             elif me != winner:
-                print winner[1]
                 winner[1] = Scripts.convert_int_to_dollar(winner[1])
-                print winner[1]
                 me[1] = Scripts.convert_int_to_dollar(me[1])
                 my_movies[league] = [winner, me]
         return my_movies

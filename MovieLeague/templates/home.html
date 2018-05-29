@@ -14,7 +14,20 @@
                     <th>Raking</th>
                     <th>Total</th>
             </thead>
-            {% if my_movies[league][0][0] != "No Winner" %}
+            {% if my_movies[league]|length == 1 %}
+            <tbody>
+                <tr>
+                    <td>Leader</td>
+                    <td>
+                        {{ my_movies[league][0][0]|title }}
+                    </td>
+                    <td>
+                        {{ my_movies[league][0][1]|title }}
+                    </td>
+                </tr>
+            </tbody>
+
+            {% elif my_movies[league]|length == 2 %}
             <tbody>
                 <tr>
                     <td>Leader</td>
@@ -27,18 +40,6 @@
                 </tr>
                 <tr>
                     <td>You</td>
-                    <td>
-                        {{ my_movies[league][1][0]|title }}
-                    </td>
-                    <td>
-                        {{ my_movies[league][1][1]|title }}
-                    </td>
-                </tr>
-            </tbody>
-            {% else %}
-            <tbody>
-                <tr>
-                    <td>Leader</td>
                     <td>
                         {{ my_movies[league][1][0]|title }}
                     </td>
