@@ -354,4 +354,3 @@ class InteractWithMovieDb(object):
 
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_league_users_and_movies('TestLeague5')

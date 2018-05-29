@@ -10,11 +10,14 @@ from flask_login import login_user, login_required, logout_user, current_user
 from CheckUserInfo import users
 
 
+
 ALPHA = app.config['ALPHA']
 BETA = app.config['BETA']
 LIVE = app.config['LIVE']
 
 REDIRECT_URI = '/oauth2callback'  # one of the Redirect URIs from Google APIs console
+gREDIRECT = 'home'
+add_token = None
 
 scripts = MLScripts()
 oauth = OAuth()
@@ -73,7 +76,11 @@ def google_signup():
     else:
         db.add_user(info['name'], info['given_name'], info['family_name'], info['email'])
     session["json"] = info
-    return redirect(url_for('home'))
+    print gREDIRECT
+    if gREDIRECT == 'add_user':
+        return redirect(url_for(gREDIRECT, token=add_token))
+    elif gREDIRECT == 'home':
+        return redirect(url_for(gREDIRECT))
 
 
 @app.route('/login')
@@ -180,6 +187,7 @@ def create_league():
             end_date = form.end_date.data
             end_record = form.end_record.data
             try:
+                print league_name, owner, start_date, end_date, end_record
                 scripts.create_league(league_name, owner, start_date, end_date, end_record)
             except Exception:
                 # TODO add errors for db creation exceptions
@@ -206,6 +214,7 @@ def invite_friend(league):
         if ALPHA:
             return redirect(url_for('under_construction'))
         scripts.send_invite_friend_email(sender, league, emails)
+        return render_template('invite_friend.html', league=league)
 
     elif request.method == 'GET':
         return render_template('invite_friend.html', league=league, form=form)
@@ -213,7 +222,11 @@ def invite_friend(league):
 
 @app.route('/add_user/<token>')
 def add_user(token):
+    global gREDIRECT
+    global add_token
     if session.get('access_token') is None:
+        gREDIRECT = 'add_user'
+        add_token = token
         return redirect(url_for('google_signup'))
     scripts.add_user_to_league_by_token(session['json'], token)
     return render_template('added.html')

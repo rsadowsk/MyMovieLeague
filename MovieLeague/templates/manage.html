@@ -41,14 +41,15 @@
         </div>
         {{ form.ret }}
     </div>
-    <div >
-        <div id="submitForm" class="ui animated button" tabindex="0" onclick="passToJS()">
+    <div id="container" >
+        <div id="addForm" class="ui animated button" tabindex="0" onclick="passToJS()">
           <div class="visible content">Add</div>
           <div class="hidden content">
             <i class="plus icon"></i>
           </div>
         </div>
         <input class="ui button" id="submit" name="submit" type="submit" value="Submit">
+
     </div>
 </form>
 
@@ -87,7 +88,7 @@
     function passToJS() {
         addinputFields("{{users_json}}", "{{movies_json}}")
     };
-    $("#submitForm").on('click',function() {
+    $("#submit").on('click',function() {
         $('#ret').val($('.selection.dropdown').dropdown('get value'))
     });
 

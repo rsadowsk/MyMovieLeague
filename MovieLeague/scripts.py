@@ -34,6 +34,7 @@ class MLScripts(object):
         db = InteractWithMovieDb()
         udb = InteractWithUsersDb()
         uid = udb.get_user_info(league_owner)[0][0]
+        league_name = league_name.replace(" ", "_")
         db.add_league_to_leagues(league_name, uid, str(start_date), str(end_date), str(end_record))
         db.create_league_movie_table(league_name)
         db.create_league_table(league_name)
@@ -80,17 +81,20 @@ class MLScripts(object):
         pass
 
     def send_invite_friend_email(self, sender, league, emails):
+        se = SendEmail()
         for email in emails:
-            SendEmail(sender, league, email)
+            se.send_invite_email(sender, league, email)
 
     @staticmethod
     def add_user_movie_to_league_list(league, values):
         data = []
+        print values
         values = values.split(',')
         values = [values[idx:idx+2] for idx in range(0, len(values), 2)]
         for l in values:
             data.append("("+','.join(l)+")")
         data = ', '.join(data)
+        print data
         db = InteractWithMovieDb()
         db.add_user_movie_to_league_list(league, data)
 
@@ -159,6 +163,7 @@ class MLScripts(object):
         info = Scripts.token_load(token)
         movie_db = InteractWithMovieDb()
         movie_db.add_user_to_league_user(info, id)
+        return
 
 if __name__=='__main__':
     mls = MLScripts()

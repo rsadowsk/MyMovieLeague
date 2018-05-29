@@ -33,6 +33,8 @@ class GetMovieList(object):
                     movie.find_movie_info()
                     movie.find_movie_gross()
                     movie_title, foreign_gross, domestic_gross, worldwide_gross, release_date = movie.get_movie_data_strings()
+                    movie_title = Scripts.fix_unicode(movie_title)
+                    movie_title = Scripts.fix_acii(movie_title)
                     if foreign_gross == 'n/a':
                         foreign_gross = None
                     if domestic_gross == 'n/a':
@@ -58,7 +60,6 @@ class GetMovieList(object):
                                                        domestic_gross, worldwide_gross, movie_id)
                     else:
                         print "Not in range, %s" % release_date
-
 
                 except Exception, e:
                     print e
