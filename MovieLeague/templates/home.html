@@ -3,17 +3,20 @@
   <main class="about-section">
         <h2 class="ui large header">Home</h2>
         <h3 class="ui medium header">Welcome {{ name }}</h3>
-      <table class="ui celled fixed striped table">
-          <thead>
-          <th colspan="2">Latest Weekend Box Office</th>
-          </thead>
-          <tbody>
-            {{ wkly5 }}
-          </tbody>
-      </table>
+
+        {% if wkly5 != None %}
+          <table class="ui celled fixed striped table">
+              <thead>
+              <th colspan="2">Latest Weekend Box Office</th>
+              </thead>
+              <tbody>
+                {{ wkly5 }}
+              </tbody>
+          </table>
+        {% endif %}
 
         {% for league in my_movies %}
-            <h3>{{ league|replace("_"," ")|title }}</h3>
+            <h3><a class="ui header" href="league/{{league}}">{{ league|replace("_"," ")|title }}</a></h3>
             <table class="ui celled fixed striped table">
 
             <thead>

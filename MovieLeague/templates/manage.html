@@ -5,6 +5,9 @@
 {{user.length}}
 {% endfor %}
 
+<style>
+.big.minus.square.outline.icon {cursor: pointer}
+</style>
 
 <form class='ui form' id='UserForm' method="POST" action="/manage/{{league}}">
     {{ form.hidden_tag() }}
@@ -71,7 +74,7 @@
   </tbody>
 </table>
 <div class="ui animated button" tabindex="0">
-          <a href="/invite_friend/{{league}}">
+          <a href="/invite_friend/{{league}}" style="color:rgba(0,0,0,.6)" >
           <div class="visible content">Invite Friends</div>
           <div class="hidden content">
             <i class="plus icon"></i>
