@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, jsonify, request
+from flask import Flask, render_template, redirect, url_for, session, jsonify, request, Markup
 # TODO add models.py
 from CheckUserInfo import InteractWithUsersDb
 from flask_oauth import OAuth
@@ -128,8 +128,11 @@ def home():
     if session.get('access_token') is None:
         return redirect(url_for('google_signup'))
     name = session["json"]["given_name"]
+    wkly5 = scripts.get_weekend_5()
+    wkly5 = Markup(wkly5)
+    print wkly5
     my_movies = scripts.my_leagues_rankings(session['json'])
-    return render_template("home.html", my_movies=my_movies, name=name)
+    return render_template("home.html", wkly5=wkly5, my_movies=my_movies, name=name)
 
 
 @app.route("/leagues")

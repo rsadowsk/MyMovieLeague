@@ -8,6 +8,8 @@ from AppScripts import Scripts
 import re
 import json
 import datetime
+import urllib2
+from bs4 import BeautifulSoup
 
 
 class MLScripts(object):
@@ -161,7 +163,16 @@ class MLScripts(object):
         movie_db.add_user_to_league_user(info, id)
         return
 
+    def get_weekend_5(self):
+        url = 'http://www.boxofficemojo.com/data/js/wknd5.php'
+        html = urllib2.urlopen(url)
+        ret = []
+        for i in html.readlines():
+            if "$" in i:
+                ret.append(i.split("(")[1].split(")")[0].strip("'"))
+        return ''.join(ret)
+
+
 if __name__=='__main__':
     mls = MLScripts()
-    json = {u'family_name': u'Sadowski', u'name': u'Richard Sadowski', u'picture': u'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg', u'gender': u'male', u'email': u'richard.j.sadowski@gmail.com', u'link': u'https://plus.google.com/111887332429616518308', u'given_name': u'Richard', u'id': u'111887332429616518308', u'verified_email': True}
-    mls.add_user_to_league_by_token(json, 'InRlc3RsZWFndWUi.uFMUfQ4R6O53Pz6j35PWkkcqEKw')
+    mls.get_weekend_5()

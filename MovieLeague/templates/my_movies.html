@@ -2,7 +2,7 @@
 {% block content %}
     {% for league in my_movies %}
 
-            <div class="ui medium header">{{ league|title }}</div>
+            <div class="ui medium header">{{ league|replace("_"," ")|title }}</div>
             <table class="ui sortable fixed celled table">
               <thead>
                 <tr>

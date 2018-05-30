@@ -3,10 +3,17 @@
   <main class="about-section">
         <h2 class="ui large header">Home</h2>
         <h3 class="ui medium header">Welcome {{ name }}</h3>
-        <script type="text/javascript" language="javascript" src="http://www.boxofficemojo.com/data/js/wknd5.php"></script>
+      <table class="ui celled fixed striped table">
+          <thead>
+          <th colspan="2">Latest Weekend Box Office</th>
+          </thead>
+          <tbody>
+            {{ wkly5 }}
+          </tbody>
+      </table>
 
         {% for league in my_movies %}
-            <h3>{{ league|title }}</h3>
+            <h3>{{ league|replace("_"," ")|title }}</h3>
             <table class="ui celled fixed striped table">
 
             <thead>

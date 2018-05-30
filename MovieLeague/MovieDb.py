@@ -269,7 +269,7 @@ class InteractWithMovieDb(object):
         return cur.fetchall()
 
     def add_user_movie_to_league_list(self, league, data):
-        #insert into testleague3 (user_id, movie_id) values (1,3), (2,4),(2,9)
+        #insert into testleague3 (user_id, movie_id) values (1,3), (2,4), (2,9)
         cur = self.db.cursor()
         insert_stmt = ("INSERT INTO %s (user_id, movie_id) VALUES %s")
         data = (league, data)
@@ -354,3 +354,4 @@ class InteractWithMovieDb(object):
 
 if __name__ == '__main__':
     db = InteractWithMovieDb()
+    print db.get_league_users_and_movies('Were_Testing_This')
