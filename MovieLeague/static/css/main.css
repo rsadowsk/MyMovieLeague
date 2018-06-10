@@ -4,7 +4,32 @@
     font-weight: normal;
     src: local('Uni Sans Thin'), url('../fonts/Uni Sans Thin.otf') format('otf');
 }
+body {
+    font-family: "Uni Sans Thin";
+}
 
-body{
-  font-family: "Uni Sans Thin";
+div.googlebutton {
+    zoom: 1;
+    -moz-transform: scale(0.5);
+}
+
+div#wrapper {
+    width: 95vw;
+    margin: auto;
+}
+div#overflow {
+    overflow-x:auto;
+}
+img.logo {
+    width:60%;
+    height: 60%;
+    display: block;
+    margin: 0 auto;
+    align-content: center;
+    vertical-align: middle;
+    margin-bottom: 5vh;
+}
+
+.ui.visible.right.overlay.sidebar {
+  z-index: 999 !important;
 }

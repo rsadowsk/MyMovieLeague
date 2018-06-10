@@ -5,7 +5,7 @@
         <h3 class="ui medium header">Welcome {{ name }}</h3>
 
         {% if wkly5 != None %}
-          <table class="ui celled fixed striped table">
+          <table class="ui celled unstackable fixed striped table">
               <thead>
               <th colspan="2">Latest Weekend Box Office</th>
               </thead>
@@ -17,7 +17,7 @@
 
         {% for league in my_movies %}
             <h3><a class="ui header" href="league/{{league}}">{{ league|replace("_"," ")|title }}</a></h3>
-            <table class="ui celled fixed striped table">
+            <table class="ui celled unstackable fixed striped table">
 
             <thead>
                     <th class="one wide"></th>

@@ -1,42 +1,59 @@
 {% include "layout.html" %}
 
   <body>
-
-    <div class="ui grid">
-      <div class="two wide column"></div>
-      <div class="twelve wide column">
-          <div class="ui inverted segment">
-
-          <div class="ui secondary inverted pointing menu">
+    <div id="wrapper">
+        <div class="ui top inverted pointing menu">
             <header>
-
-              <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
-
+                <a class="item" href="{{ url_for('home') }}">
+                  <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
+                </a>
             </header>
-            <a class="item" href="{{ url_for('home') }}">
-              Home
-            </a>
-            <a class="item" href="{{ url_for('my_movies') }}">
-              My Movies
-            </a>
-            <a class="item" href="{{ url_for('leagues') }}">
-              Leagues
-            </a>
             <div class="right menu">
-              <a class="item" href="{{ url_for('logout') }}">
-                Logout
+              <a class="item" id="right-sidebar-toggle">
+                <i class="sidebar icon"></i>
+                Menu
               </a>
             </div>
-          </div>
+            </div>
+            <div class="ui bottom attached segment pushable">
+              <!-- RIGHT MENU -->
+                <div class="ui inverted overlay labeled icon right inline vertical sidebar menu ">
+                <a class="item" href="{{ url_for('home') }}">
+                    <i class="home icon"></i>
+                    Home
+                </a>
+                <a class="item" href="{{ url_for('my_movies') }}">
+                    <i class="film icon"></i>
+                    My Movies
+                </a>
+                <a class="item" href="{{ url_for('leagues') }}">
+                    <i class="users icon"></i>
+                    Leagues
+                </a>
+                <a class="item" href="{{ url_for('logout') }}">
+                    <i class="sign out alternate icon"></i>
+                    Logout
+                </a>
+                </div>
+              <div class="pusher">
+                {% block content %}
+                {% endblock %}
+              </div>
+            </div>
         </div>
 
-            {% block content %}
-            {% endblock %}
-          </div>
-          <div class="two wide column"></div>
+<script>
+    $(function() {
+$('.ui.right.sidebar').sidebar({
+ dimPage: false,
+ transition: 'push',
+ exclusive: false,
+ closable: false
+ });
 
-        </div>
+ $('.ui.right.sidebar')
+ .sidebar('attach events', '#right-sidebar-toggle');})
 
-
+</script>
 
   </body>

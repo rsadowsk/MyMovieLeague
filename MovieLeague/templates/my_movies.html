@@ -3,7 +3,7 @@
     {% for league in my_movies %}
 
             <div class="ui medium header"><a class="ui header" href="league/{{league}}">{{ league|replace("_"," ")|title }}</a></div>
-            <table class="ui sortable fixed celled table">
+            <table class="ui sortable unstackable fixed celled table">
               <thead>
                 <tr>
                   <th class="">Movie Title</th>
