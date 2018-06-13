@@ -1,0 +1,16 @@
+{% include "layout.html" %}
+
+  <body>
+    <div id="wrapper">
+        <div class="ui top inverted pointing menu">
+            <header>
+                <a class="item" href="{{ url_for('index') }}">
+                  <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
+                </a>
+            </header>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+  </body>

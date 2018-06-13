@@ -88,6 +88,7 @@
         background-size:     cover;
         background-repeat:   no-repeat;
         background-position: center center;
+        height: 90vh;
     }
   </style>
 
@@ -127,12 +128,13 @@
 
 
     <div class="ui text container" id="jumbotron">
-
-        <img class="logo" src="{{ url_for('static', filename='img/square_gold.png') }}">
-        <div class="googlebutton">
+        <div id="logo">
+            <img class="logo" src="{{ url_for('static', filename='img/square_gold.png') }}">
+        </div>
+        <div id="googlebutton">
             <button class="ui google plus huge primary button">
               <i class="google plus icon"></i>
-             <a class="google a" href="{{url_for('google_signup') }}" >Sign up Google</a>
+             <a class="google a" href="{{url_for('google_signup') }}" >Sign in with Google</a>
             </button>
         </div>
     </div>
@@ -141,30 +143,22 @@
 
   <div class="ui  vertical footer segment">
     <div class="ui container">
-      <div class="ui stackable divided equal height stackable grid">
-        <div class="three wide column">
-          <h4 class="ui  header">About</h4>
-          <div class="ui  link list">
-            <a href="#" class="item">Sitemap</a>
-            <a href="#" class="item">Contact Us</a>
-            <a href="#" class="item">Religious Ceremonies</a>
-            <a href="#" class="item">Gazebo Plans</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui  header">Services</h4>
-          <div class="ui  link list">
-            <a href="#" class="item">Banana Pre-Order</a>
-            <a href="#" class="item">DNA FAQ</a>
-            <a href="#" class="item">How To Access</a>
-            <a href="#" class="item">Favorite X-Men</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui  header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-        </div>
+      <div id="footer" class="ui stackable grid">
+          <h4 id="footer"><a href="{{url_for('about_us') }}" class="item">About Us</a></h4>
+          <h4 id="footer"><a href="{{url_for('contact_us') }}" class="item">Contact Us</a></h4>
+          <h4 id="footer"><a href="{{url_for('privacy') }}" class="item">Privacy</a></h4>
+          <h4 id="footer"><a href="{{url_for('sitemap') }}" class="item">Sitemap</a></h4>
       </div>
+      <div id="footer">
+          <p id="footer">
+            &copy
+            <script type="text/javascript">
+              document.write(new Date().getFullYear());
+            </script>
+            MyMovieLeague.com
+        </p>
+      </div>
+
     </div>
   </div>
 </div>

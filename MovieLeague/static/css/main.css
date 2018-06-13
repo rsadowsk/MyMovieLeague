@@ -20,16 +20,57 @@ div#wrapper {
 div#overflow {
     overflow-x:auto;
 }
-img.logo {
-    width:60%;
-    height: 60%;
+
+/*img.logo {
+    width:60vmin;
+    height: 60vmin;
     display: block;
     margin: 0 auto;
     align-content: center;
     vertical-align: middle;
-    margin-bottom: 5vh;
+    margin-bottom: 5vmin;
+}*/
+
+div#logo {
+
+}
+
+img.logo {
+    max-width: 29vmax;
+    height: auto;
 }
 
 .ui.visible.right.overlay.sidebar {
   z-index: 999 !important;
+}
+
+div#jumbotron {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+div#googlebutton {
+    max-width: 100%;
+    height: auto;
+
+}
+
+#footer {
+    margin: 0 ;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#create_helpdiv {
+    margin: auto;
+}
+
+#create_helplabel {
+    float: left;
+}
+
+#create_helpicon {
+    float:left;
 }

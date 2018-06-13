@@ -8,11 +8,11 @@
             <tr>
                 <th colspan="3">
                     {% if league|length > 1 %}
-                        <div class="ui right aligned grid">
+                        <div class="ui right aligned stackable grid">
                             <div class="left aligned thirteen wide column">
                                 <h2>{{ league|replace("_"," ")|title }}</h2>
                             </div>
-                            <div class="right aligned one wide column">
+                            <div class="left aligned one wide column">
                                 <a class="ui header" href="league/{{league}}"><u>Details</u></a>
                             </div>
                             <div class="left aligned one wide column">

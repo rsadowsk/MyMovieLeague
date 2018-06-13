@@ -1,5 +1,6 @@
 {
     "dev": {
+        "keep_warm": false,
         "s3_bucket" : "mymovieleaguezappa",
         "app_function": "MovieLeague.routes.app", 
         "aws_region": "eu-west-2",
@@ -9,12 +10,8 @@
         "certificate_arn": "arn:aws:acm:us-east-1:493225519480:certificate/2a710344-3675-494b-8b43-365af34a5026",
         "route53_enabled": true,
         "domain": "dev.mymovieleague.com",
-        "events": [{
-           "function": "MovieLeague.UpdateMovies",
-           "expression": "cron(0 1 * * ? *)"
-       }],
-      "timeout_seconds": 300,
-      "xray_tracing": true
+        "timeout_seconds": 300,
+        "xray_tracing": true
     },
     "prod": {
         "s3_bucket" : "mymovieleaguezappa",
@@ -27,7 +24,7 @@
         "route53_enabled": true,
         "domain": "www.mymovieleague.com",
         "events": [{
-           "function": "MovieLeague.UpdateMovies",
+           "function": "MovieLeague.tasks.main",
            "expression": "cron(0 1 * * ? *)"
        }],
       "timeout_seconds": 300,

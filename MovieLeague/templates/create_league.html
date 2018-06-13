@@ -1,10 +1,17 @@
 {% extends "UserLayout.html" %}
 {% block content %}
 
+<script>
+$(function() {
+    $('.popup-button1').popup({
+        inline: true,
+        on: 'click',
+    });})
+</script>
 <form class='ui form' method="POST" action="/create_league">
     {{ form.hidden_tag() }}
     <div class="form-group">
-                {{ form.league_name.label}}
+                <h4>{{ form.league_name.label}}</h4>
                 {{ form.league_name }}
                 {% if form.league_name.errors %}
                     {% for error in form.league_name.errors %}
@@ -12,13 +19,16 @@
                     {% endfor %}
                 {% endif %}
         <!-- TODO update help icons -->
+
         <div class="equal width fields">
             <div class="field">
-                <div>
-                    {{ form.start_date.label}}
-                    <div class="ui icon button" data-tooltip="Add users to your feed">
-                    <i class="question icon"></i>
-                </div>
+                <div id="create_helpdiv">
+                    <div id="create_helplabel">
+                        <h4>{{ form.start_date.label}}</h4>
+                    </div>
+                    <div class='ui popup-button1' data-html="The start of your league. Movies released after this date will be available for your to compete with." >
+                        <i class='small circular question icon'> </i>
+                    </div>
                 </div>
                 {{ form.start_date(class='datepicker') }}
                 {% if form.start_date.errors %}
@@ -28,11 +38,13 @@
                 {% endif %}
             </div>
             <div class="field">
-                <div>
-                    {{ form.end_date.label}}
-                    <div class="ui icon button" data-tooltip="Add users to your feed">
-                    <i class="question icon"></i>
-                </div>
+                <div id="create_helpdiv">
+                    <div id="create_helplabel">
+                        <h4>{{ form.end_date.label}}</h4>
+                    </div>
+                    <div id="create_helpicon" data-tooltip="Add users to your feed">
+                    <i class="small circular question icon"></i>
+                    </div>
                 </div>
                 {{ form.end_date(class='datepicker') }}
                 {% if form.end_date.errors %}
@@ -42,11 +54,13 @@
                 {% endif %}
             </div>
             <div class="field">
-                <div>
-                    {{ form.end_record.label}}
-                    <div class="ui icon button" data-tooltip="Add users to your feed">
-                    <i class="question icon"></i>
-                </div>
+                <div id="create_helpdiv">
+                    <div id="create_helplabel">
+                        <h4>{{ form.end_record.label}}</h4>
+                    </div>
+                    <div id="create_helpicon" data-tooltip="Add users to your feed">
+                    <i class="small circular question icon"></i>
+                    </div>
                 </div>
                 {{ form.end_record(class='datepicker') }}
                 {% if form.end_record.errors %}
@@ -60,7 +74,12 @@
 
     </div>
     {{ form.submit(class="ui button") }}
-
 </form>
-
+<script>
+$(function() {
+    $('.popup-button1').popup({
+        inline: true,
+        on: 'click',
+    });})
+</script>
 {% endblock %}

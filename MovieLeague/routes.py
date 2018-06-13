@@ -111,7 +111,7 @@ def get_access_token():
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about_us.html")
 
 
 @app.route("/my_movies")
@@ -240,6 +240,26 @@ def add_user(token):
 @app.route('/test')
 def test():
     return render_template('test.html')
+
+
+@app.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
+
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
+
+
+@app.route('/sitemap')
+def sitemap():
+    return render_template('sitemap.html')
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 
 
 def main():
