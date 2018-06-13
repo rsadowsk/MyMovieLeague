@@ -54,7 +54,7 @@ class CreateLeagueForm(FlaskForm):
     end_record = DateField('End Record', format='%Y-%m-%d',
                            validators=[validators.DataRequired("Please enter a valid date."),
                                        validate_date])
-    submit = SubmitField("Enter Test Stuff")
+    submit = SubmitField("Create")
 
     def validate(self):
         if not FlaskForm.validate(self):

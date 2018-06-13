@@ -148,6 +148,7 @@ class InteractWithMovieDb(object):
                        "values ('%s', '%s', '%s', '%s', '%s')")
         data = (argv[0], argv[1], argv[2], argv[3], argv[4])
         insert = insert_stmt % data
+        print insert
         cur.execute(insert)
         self.db.commit()
 

@@ -8,6 +8,7 @@ from forms import CreateLeagueForm, ManageUsersMovies, InviteFriends, LoginForm
 from MovieLeague import app, login_manager
 from flask_login import login_user, login_required, logout_user, current_user
 from CheckUserInfo import users
+from zappa.async import run
 
 
 

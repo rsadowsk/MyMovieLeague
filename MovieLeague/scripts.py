@@ -9,7 +9,8 @@ import re
 import json
 import datetime
 import urllib2
-from bs4 import BeautifulSoup
+from zappa.async import run
+import tasks
 
 
 class MLScripts(object):
@@ -33,18 +34,29 @@ class MLScripts(object):
 
     @staticmethod
     def create_league(league_name, league_owner, start_date, end_date, end_record):
+        print 'hi'
         db = InteractWithMovieDb()
         udb = InteractWithUsersDb()
         uid = udb.get_user_info(league_owner)[0][0]
+        print 'hi1'
         league_name = league_name.replace(" ", "_")
+        print 'hi2'
+        print league_name, uid, str(start_date), str(end_date), str(end_record)
         db.add_league_to_leagues(league_name, uid, str(start_date), str(end_date), str(end_record))
+        print 'hi3'
         db.create_league_movie_table(league_name)
+        print 'hi4'
         db.create_league_table(league_name)
+        print 'hi5'
         db.create_league_user_table(league_name)
+        print 'hi6'
         db.add_user_to_league_user(league_name, int(uid))
+        print 'hi7'
         # populate league_movies
-        gml = GetMovieList(league_name)
-        gml.get_date_range()
+        #gml = GetMovieList(league_name)
+        #gml.get_date_range()
+        tasks.get_date_range(league_name)
+        print 'hi'
 
     @staticmethod
     def get_leagues(user):
