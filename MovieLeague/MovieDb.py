@@ -353,6 +353,25 @@ class InteractWithMovieDb(object):
         cur.execute(insert)
         return cur.fetchall()
 
+    def get_all_movies_for_league(self, league):
+        """
+        select * from New_Testing_League_movies ORDER BY release_date, movie_title asc
+        """
+        cur = self.db.cursor()
+        insert_stmt = ("SELECT movie_title, "
+                       "release_date, "
+                       "foreign_gross, "
+                       "domestic_gross, "
+                       "worldwide_gross "
+                       "FROM %s_movies "
+                       "ORDER BY release_date, movie_title ASC")
+        data = (league)
+        insert = insert_stmt % data
+        print insert
+        cur.execute(insert)
+        print cur.execute(insert)
+        return cur.fetchall()
+
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_league_users_and_movies('Were_Testing_This')
+    print db.get_all_movies_for_league('New_Testing_League')

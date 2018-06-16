@@ -8,7 +8,7 @@
 <style>
 .big.minus.square.outline.icon {cursor: pointer}
 </style>
-
+<h3>Assign Users to Movies</h3>
 <form class='ui form' id='UserForm' method="POST" action="/manage/{{league}}">
     {{ form.hidden_tag() }}
     <div id="formgroup" class="form-group">
@@ -18,7 +18,7 @@
                 <div class="ui search selection dropdown">
                   <input id="UsersDefaultNameInput" name="name" type="name">
                   <i class="dropdown icon"></i>
-                  <div class="default text" id="UsersDefaultNameDiv">Default</div>
+                  <div class="default text" id="UsersDefaultNameDiv">Search..</div>
                   <div class="menu">
                       {% for user in users %}
                       <div class="item" data-value="{{user[0]}}">{{user[1]}}</div>
@@ -31,7 +31,7 @@
                 <div class="ui search selection dropdown">
                   <input id="UsersDefaultMovieInput" name="movie" type="movie">
                   <i class="dropdown icon"></i>
-                  <div class="default text" id="UsersDefaultMovieDiv">Default</div>
+                  <div class="default text" id="UsersDefaultMovieDiv">Search..</div>
                   <div class="menu">
                       {% for movie in movies %}
                       <div class="item" data-value="{{movie[0]}}">{{movie[1]}}</div>

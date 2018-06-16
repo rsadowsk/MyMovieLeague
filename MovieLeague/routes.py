@@ -156,11 +156,21 @@ def league(league):
         return render_template("league.html", league_info=league_info, league=league)
 
 
+@app.route("/league/<string:league>/all")
+def league_all(league):
+    if session.get('access_token') is None:
+        return render_template("index.html")
+    elif request.method == "GET":
+        movies = scripts.get_all_movies_for_league(league)
+        return render_template("league_all.html", movies=movies, league=league)
+
+
 @app.route("/manage/<string:league>", methods=["GET", "POST"])
 def manage(league):
     if session.get('access_token') is None:
         return render_template("index.html")
     form = ManageUsersMovies()
+    # TODO add check for league owner
     if request.method == 'POST':
         values = form.ret.data
         scripts.add_user_movie_to_league_list(league, values)

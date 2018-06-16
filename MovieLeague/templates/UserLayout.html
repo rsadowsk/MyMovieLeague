@@ -1,8 +1,27 @@
 {% include "layout.html" %}
 
   <body>
-    <div id="wrapper">
-        <div class="ui top inverted pointing menu">
+      <!-- RIGHT MENU -->
+        <div class="ui inverted overlay labeled icon right inline vertical sidebar menu ">
+        <a class="item" href="{{ url_for('home') }}">
+            <i class="home icon"></i>
+            Home
+        </a>
+        <a class="item" href="{{ url_for('my_movies') }}">
+            <i class="film icon"></i>
+            My Movies
+        </a>
+        <a class="item" href="{{ url_for('leagues') }}">
+            <i class="users icon"></i>
+            Leagues
+        </a>
+        <a class="item" href="{{ url_for('logout') }}">
+            <i class="sign out alternate icon"></i>
+            Logout
+        </a>
+        </div>
+    <div class="pusher">
+          <div class="ui top inverted pointing menu">
             <header>
                 <a class="item" href="{{ url_for('home') }}">
                   <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
@@ -14,41 +33,20 @@
                 Menu
               </a>
             </div>
-            </div>
-            <div class="ui bottom attached segment pushable">
-              <!-- RIGHT MENU -->
-                <div class="ui inverted overlay labeled icon right inline vertical sidebar menu ">
-                <a class="item" href="{{ url_for('home') }}">
-                    <i class="home icon"></i>
-                    Home
-                </a>
-                <a class="item" href="{{ url_for('my_movies') }}">
-                    <i class="film icon"></i>
-                    My Movies
-                </a>
-                <a class="item" href="{{ url_for('leagues') }}">
-                    <i class="users icon"></i>
-                    Leagues
-                </a>
-                <a class="item" href="{{ url_for('logout') }}">
-                    <i class="sign out alternate icon"></i>
-                    Logout
-                </a>
-                </div>
-              <div class="pusher">
-                {% block content %}
-                {% endblock %}
-              </div>
-            </div>
         </div>
+          <div class="ui raised very padded segment">
+            {% block content %}
+            {% endblock %}
+          </div>
+          </div>
 
 <script>
     $(function() {
 $('.ui.right.sidebar').sidebar({
- dimPage: false,
+ dimPage: true,
  transition: 'push',
  exclusive: false,
- closable: false
+ closable: true
  });
 
  $('.ui.right.sidebar')

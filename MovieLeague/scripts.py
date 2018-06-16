@@ -184,6 +184,12 @@ class MLScripts(object):
                 ret.append(i.split("(")[1].split(")")[0].strip("'"))
         return ''.join(ret)
 
+    def get_all_movies_for_league(self, league):
+        movie_db = InteractWithMovieDb()
+        movies = movie_db.get_all_movies_for_league(league)
+        print movies
+        return movies
+
 
 if __name__=='__main__':
     mls = MLScripts()

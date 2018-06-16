@@ -4,6 +4,8 @@ function addinputFields(users, movies){
     TopDiv.id = "equalqwidthfields_"+count;
     var InnerDiv = document.createElement('div');
     InnerDiv.className = "eight wide field";
+    var NameLabel = document.createElement('label');
+	NameLabel.innerHTML = 'Name';
     var secondInnerDiv = document.createElement('div');
     secondInnerDiv.className = "ui search selection dropdown";
     var firstInput = document.createElement('input');
@@ -19,6 +21,7 @@ function addinputFields(users, movies){
     var thirdInnerDiv = document.createElement('div');
     thirdInnerDiv.className = "default text";
     thirdInnerDiv.id = "UsersDefaultNameDiv".concat(count);
+    thirdInnerDiv.innerHTML = "Search..";
     var fourthInnerDiv = document.createElement('div');
     fourthInnerDiv.className = "menu";
     fourthInnerDiv.setAttribute("tabindex", "-1");
@@ -34,6 +37,8 @@ function addinputFields(users, movies){
     );
     var InnerDiv_m = document.createElement('div');
     InnerDiv_m.className = "seven wide field";
+    var MovieLabel = document.createElement('label');
+	MovieLabel.innerHTML = 'Movie';
     var secondInnerDiv_m = document.createElement('div');
     secondInnerDiv_m.className = "ui search selection dropdown";
     var firstInput_m = document.createElement('input');
@@ -49,6 +54,7 @@ function addinputFields(users, movies){
     var thirdInnerDiv_m = document.createElement('div');
     thirdInnerDiv_m.className = "default text";
     thirdInnerDiv_m.id = "UsersDefaultMovieDiv".concat(count);
+    thirdInnerDiv_m.innerHTML = "Search..";
     var fourthInnerDiv_m = document.createElement('div');
     fourthInnerDiv_m.className = "menu";
     fourthInnerDiv_m.setAttribute("tabindex", "-1");
@@ -85,6 +91,7 @@ function addinputFields(users, movies){
     secondInnerDiv.appendChild(secondInput);
     secondInnerDiv.appendChild(thirdInnerDiv);
     secondInnerDiv.appendChild(fourthInnerDiv);
+    InnerDiv.append(NameLabel);
     InnerDiv.appendChild(secondInnerDiv);
     TopDiv.appendChild(InnerDiv);
 
@@ -93,6 +100,7 @@ function addinputFields(users, movies){
     secondInnerDiv_m.appendChild(secondInput_m);
     secondInnerDiv_m.appendChild(thirdInnerDiv_m);
     secondInnerDiv_m.appendChild(fourthInnerDiv_m);
+    InnerDiv_m.append(MovieLabel);
     InnerDiv_m.appendChild(secondInnerDiv_m);
     TopDiv.appendChild(InnerDiv_m);
 
