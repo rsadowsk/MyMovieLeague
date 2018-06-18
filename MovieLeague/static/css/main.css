@@ -78,3 +78,11 @@ div#googlebutton {
 div.ui.raised.very.padded.segment {
     flex: 1 1 auto;
 }
+
+a.google.a {
+    color: #E7BE49;
+}
+
+i.google.plus.icon {
+    color: #E7BE49;
+}

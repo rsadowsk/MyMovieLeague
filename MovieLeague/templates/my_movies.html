@@ -1,6 +1,17 @@
 {% extends "UserLayout.html" %}
 {% block content %}
+
+
+      {% if my_movies|length == 0 %}
+          <div class="ui raised very padded text container segment">
+          <h2 class="ui header">Uh, oh!</h2>
+          <p>You don't have any movies right now! Head over to your leagues to create a new league and start playing.</p>
+        </div>
+      {% endif %}
+
+
     {% for league in my_movies %}
+
 
             <div class="ui medium header"><a class="ui header" href="league/{{league}}">{{ league|replace("_"," ")|title }}</a></div>
             <table class="ui sortable unstackable fixed celled table">
@@ -14,6 +25,8 @@
                 </tr>
               </thead>
               <tbody>
+
+
             {% for movie_info in my_movies[league] %}
                 {% if loop.index < my_movies[league]|length %}
                 <tr>

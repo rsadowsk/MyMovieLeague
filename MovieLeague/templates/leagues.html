@@ -2,6 +2,14 @@
 {% block content %}
 <div class="ui relaxed divided list">
 
+{% if my_movies|length == 0 %}
+  <div class="ui raised very padded text container segment">
+      <h2 class="ui header">Uh, oh!</h2>
+      <p>You don't have any leagues right now! Click below to create a new league of your own!.</p>
+    <a class="ui button" href="{{ url_for('create_league') }}">Create League</a>
+  </div>
+{% endif %}
+
 {% for league in my_movies %}
     <table class="ui celled unstackable striped table">
         <thead>
@@ -45,11 +53,12 @@
                 {% endfor %}
             </tbody>
     </table>
+    <a class="ui button" href="{{ url_for('create_league') }}">Create League</a>
 {% endfor %}
 
 </div>
 
 
 
-<a class="ui button" href="{{ url_for('create_league') }}">Create League</a>
+
 {% endblock %}

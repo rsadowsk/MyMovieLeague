@@ -223,6 +223,16 @@ class InteractWithMovieDb(object):
         cur.execute(insert)
         return cur.fetchall()
 
+    def get_league_users_ids(self, league):
+        cur = self.db.cursor()
+        insert_stmt = ("select users.id "
+                       "from %s_users inner join users "
+                       "where %s_users.user_id=users.id")
+        data = (league, league)
+        insert = insert_stmt % data
+        cur.execute(insert)
+        return cur.fetchall()
+
     def get_user_leagues(self, user):
         cur = self.db.cursor()
         insert_stmt = ("SELECT leagues FROM users WHERE user_name='%s'")
@@ -374,4 +384,7 @@ class InteractWithMovieDb(object):
 
 if __name__ == '__main__':
     db = InteractWithMovieDb()
-    print db.get_all_movies_for_league('New_Testing_League')
+    print db.get_league_users_ids('New_Testing_League')
+    for i in db.get_league_users_ids('New_Testing_League'):
+        if 1 in i:
+            print 'hi'

@@ -117,6 +117,7 @@ class MLScripts(object):
         my_movies = OrderedDict()
         db = InteractWithUsersDb()
         movie_db = InteractWithMovieDb()
+        print user_info
         id = db.get_user_info(user_info["name"])[0][0]
         leagues = movie_db.get_users_leagues(str(id))
         for league in leagues:
@@ -172,8 +173,12 @@ class MLScripts(object):
         id = db.get_user_info(user_info["name"])[0][0]
         info = Scripts.token_load(token)
         movie_db = InteractWithMovieDb()
+        users = movie_db.get_league_users_ids(info)
+        for i in users:
+            if id in i:
+                return False
         movie_db.add_user_to_league_user(info, id)
-        return
+        return True
 
     def get_weekend_5(self):
         url = 'http://www.boxofficemojo.com/data/js/wknd5.php'
@@ -193,4 +198,4 @@ class MLScripts(object):
 
 if __name__=='__main__':
     mls = MLScripts()
-    mls.get_weekend_5()
+    mls.add_user_to_league_by_token({u'family_name': u'Sadowski', u'name': u'Richard Sadowski', u'picture': u'https://lh5.googleusercontent.com/-6W2zKUUAC8M/AAAAAAAAAAI/AAAAAAAAAAA/AB6qoq3bDQrEOqj-IRssIFXX-92rj7zxrQ/mo/photo.jpg', u'gender': u'male', u'email': u'richard.j.sadowski@gmail.com', u'link': u'https://plus.google.com/111887332429616518308', u'given_name': u'Richard', u'id': u'111887332429616518308', u'verified_email': True}, 'Ik5ld19UZXN0aW5nX0xlYWd1ZSI.tQ8IHG_cwouQD3i096UruekAqPI')

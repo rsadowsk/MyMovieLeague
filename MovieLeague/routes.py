@@ -120,7 +120,6 @@ def my_movies():
     if session.get('access_token') is None:
         return render_template("index.html")
     my_movies = scripts.my_movies(session['json'])
-
     return render_template("my_movies.html", my_movies=my_movies)
 
 
@@ -230,7 +229,7 @@ def invite_friend(league):
         if ALPHA:
             return redirect(url_for('under_construction'))
         scripts.send_invite_friend_email(sender, league, emails)
-        return render_template('invite_friend.html', league=league)
+        return render_template('invite_sent.html', league=league)
 
     elif request.method == 'GET':
         return render_template('invite_friend.html', league=league, form=form)
@@ -244,9 +243,11 @@ def add_user(token):
         gREDIRECT = 'add_user'
         add_token = token
         return redirect(url_for('google_signup'))
-    scripts.add_user_to_league_by_token(session['json'], token)
-    return render_template('added.html')
-
+    ret = scripts.add_user_to_league_by_token(session['json'], token)
+    if ret:
+        return render_template('added.html')
+    else:
+        return render_template("index.html")
 
 @app.route('/test')
 def test():

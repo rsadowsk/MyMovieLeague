@@ -4,7 +4,7 @@
     {% if not league_info %}
         <div class="ui raised very padded text container segment">
           <h2 class="ui header">Uh, oh!</h2>
-          <p>{{ league|title }} doesn't seem to have any movies assigned to any users. The league owner can assign
+          <p>{{ league|replace("_"," ")|title }} doesn't seem to have any movies assigned to any users. The league owner can assign
               players their movies from <a href="{{ url_for('manage', league=league) }}">here</a></p>
         </div>
     {% endif %}
