@@ -1,8 +1,8 @@
 {% include "layout.html" %}
 
   <body>
-      <!-- RIGHT MENU -->
-        <div class="ui inverted overlay labeled icon right inline vertical sidebar menu ">
+      <!-- LEFT MENU -->
+        <div class="ui inverted overlay labeled icon left inline vertical sidebar menu ">
         <a class="item" href="{{ url_for('home') }}">
             <i class="home icon"></i>
             Home
@@ -21,18 +21,18 @@
         </a>
         </div>
     <div class="pusher">
-          <div class="ui top attached inverted pointing menu">
+          <div class="ui top attached borderless inverted pointing menu">
+              <div class="left menu">
+              <a class="item" id="left-sidebar-toggle">
+                <i class="sidebar icon"></i>
+              </a>
+            </div>
             <header>
                 <a class="item" href="{{ url_for('home') }}">
                   <img src="{{ url_for('static', filename='img/long_gold.png') }}" style="width:150px;height:45px;display: block;margin: 0 auto;">
                 </a>
             </header>
-            <div class="right menu">
-              <a class="item" id="right-sidebar-toggle">
-                <i class="sidebar icon"></i>
-                Menu
-              </a>
-            </div>
+
         </div>
           <div class="ui raised very padded segment">
             {% block content %}
@@ -42,15 +42,15 @@
 
 <script>
     $(function() {
-$('.ui.right.sidebar').sidebar({
+$('.ui.left.sidebar').sidebar({
  dimPage: true,
  transition: 'push',
- exclusive: false,
+ exclusive: true,
  closable: true
  });
 
- $('.ui.right.sidebar')
- .sidebar('attach events', '#right-sidebar-toggle');})
+ $('.ui.left.sidebar')
+ .sidebar('attach events', '#left-sidebar-toggle');})
 
 </script>
 
