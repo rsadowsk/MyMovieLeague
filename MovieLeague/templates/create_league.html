@@ -21,6 +21,8 @@ $(function() {
         <!-- TODO update help icons -->
 
         <div class="equal width fields">
+
+
             <div class="field">
                 <div id="create_helpdiv">
                     <div id="create_helplabel">
@@ -37,13 +39,16 @@ $(function() {
                     {% endfor %}
                 {% endif %}
             </div>
+
+
+
             <div class="field">
                 <div id="create_helpdiv">
                     <div id="create_helplabel">
                         <h4>{{ form.end_date.label}}</h4>
                     </div>
-                    <div id="create_helpicon" data-tooltip="Add users to your feed">
-                    <i class="small circular question icon"></i>
+                    <div class='ui popup-button1' data-html="Movies released after this date will not be included in your league." >
+                        <i class='small circular question icon'> </i>
                     </div>
                 </div>
                 {{ form.end_date(class='datepicker') }}
@@ -53,13 +58,15 @@ $(function() {
                     {% endfor %}
                 {% endif %}
             </div>
+
+
             <div class="field">
                 <div id="create_helpdiv">
                     <div id="create_helplabel">
                         <h4>{{ form.end_record.label}}</h4>
                     </div>
-                    <div id="create_helpicon" data-tooltip="Add users to your feed">
-                    <i class="small circular question icon"></i>
+                    <div class='ui popup-button1' data-html="The official end of your league. Your movies will continue to earn box office income until this date." >
+                        <i class='small circular question icon'> </i>
                     </div>
                 </div>
                 {{ form.end_record(class='datepicker') }}
@@ -78,8 +85,8 @@ $(function() {
 <script>
 $(function() {
     $('.popup-button1').popup({
+        hoverable : true,
         inline: true,
-        on: 'click',
     });})
 </script>
 {% endblock %}
