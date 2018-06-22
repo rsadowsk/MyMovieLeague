@@ -45,13 +45,13 @@ class CreateLeagueForm(FlaskForm):
     league_name = StringField("League Name",
                               validators=[validators.DataRequired("Please enter a valid name."),
                                           fix_special_characters])
-    start_date = DateField('Start Date', format='%Y-%m-%d',
+    start_date = DateField('League Start Date', format='%Y-%m-%d',
                            validators=[validators.DataRequired("Please enter a valid date."),
                                        validate_date])
-    end_date = DateField('End Date', format='%Y-%m-%d',
+    end_date = DateField('Movie Cutoff', format='%Y-%m-%d',
                          validators=[validators.DataRequired("Please enter a valid date."),
                                      validate_date])
-    end_record = DateField('End Record', format='%Y-%m-%d',
+    end_record = DateField('League End Date', format='%Y-%m-%d',
                            validators=[validators.DataRequired("Please enter a valid date."),
                                        validate_date])
     submit = SubmitField("Create")
