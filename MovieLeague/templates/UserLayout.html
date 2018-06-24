@@ -2,7 +2,7 @@
 
   <body>
       <!-- LEFT MENU -->
-        <div class="ui inverted overlay labeled icon left inline vertical sidebar menu ">
+        <div class="ui inverted labeled icon left vertical sidebar menu ">
         <a class="item" href="{{ url_for('home') }}">
             <i class="home icon"></i>
             Home
@@ -42,12 +42,12 @@
 
 <script>
     $(function() {
-$('.ui.left.sidebar').sidebar({
- dimPage: true,
- transition: 'push',
- exclusive: true,
- closable: true
- });
+        $('.ui.left.sidebar').sidebar({
+         dimPage: true,
+         transition: 'push',
+         exclusive: false,
+         closable: true
+         });
 
  $('.ui.left.sidebar')
  .sidebar('attach events', '#left-sidebar-toggle');})
